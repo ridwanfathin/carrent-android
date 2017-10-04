@@ -15,6 +15,7 @@ import com.rental_apps.android.rental_apps.model.model_user.DataUser;
 import com.rental_apps.android.rental_apps.myinterface.InitComponent;
 import com.squareup.picasso.Picasso;
 
+import customfonts.MyTextView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -22,12 +23,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class ActivityDetailUsers extends AppCompatActivity implements InitComponent {
-    private TextView name;
-    private TextView email;
-    private TextView noTelp;
-    private TextView address;
-    private TextView jenis_kelamin;
-    private TextView status;
+    private MyTextView name;
+    private MyTextView email;
+    private MyTextView noTelp;
+    private MyTextView address;
+    private MyTextView jenis_kelamin;
+    private MyTextView status;
     private CircleImageView userPhoto;
     Context mContext;
     Toolbar toolbar;
@@ -63,12 +64,12 @@ public class ActivityDetailUsers extends AppCompatActivity implements InitCompon
 
     @Override
     public void initUI() {
-        name=(TextView)findViewById(R.id.name);
-        email=(TextView)findViewById(R.id.email);
-        noTelp=(TextView)findViewById(R.id.notelp);
-        address=(TextView)findViewById(R.id.address);
-        jenis_kelamin=(TextView)findViewById(R.id.jenis_kelamin);
-        status=(TextView)findViewById(R.id.status);
+        name=(MyTextView)findViewById(R.id.name);
+        email=(MyTextView)findViewById(R.id.email);
+        noTelp=(MyTextView)findViewById(R.id.notelp);
+        address=(MyTextView)findViewById(R.id.address);
+        jenis_kelamin=(MyTextView)findViewById(R.id.jenis_kelamin);
+        status=(MyTextView)findViewById(R.id.status);
         userPhoto=(CircleImageView)findViewById(R.id.userPhoto);
 
     }
