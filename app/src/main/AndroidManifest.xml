@@ -29,12 +29,23 @@
         <activity android:name=".admin.AdminMain" android:theme="@style/nLiveoDrawer"
             android:screenOrientation="portrait"
             ></activity>
+        <activity android:name=".user.UserMain" android:theme="@style/nLiveoDrawer"
+            android:screenOrientation="portrait"
+            ></activity>
         <activity android:name=".admin.ActivityDetailCars" android:theme="@style/AppDetail"
             android:screenOrientation="portrait"
             ></activity>
         <activity android:name=".admin.ActivityDetailUsers" android:theme="@style/AppDetail"
             android:screenOrientation="portrait"
             ></activity>
+        <activity android:name=".admin.AdminEditProfile" android:theme="@style/AppDetail"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity android:name=".admin.ActivityCreateAdmin" android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
     </application>
 
 </manifest>

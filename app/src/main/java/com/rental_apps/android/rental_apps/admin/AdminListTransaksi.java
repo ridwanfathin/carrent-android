@@ -18,12 +18,14 @@ import android.widget.Toast;
 
 import com.mikepenz.itemanimators.SlideLeftAlphaAnimator;
 import com.rental_apps.android.rental_apps.R;
+import com.rental_apps.android.rental_apps.adapter.TransaksiAdapter;
 import com.rental_apps.android.rental_apps.adapter.UsersAdapter;
 import com.rental_apps.android.rental_apps.api.client;
+import com.rental_apps.android.rental_apps.model.model_transaksi.DataTransaksi;
+import com.rental_apps.android.rental_apps.model.model_transaksi.ResponseTransaksi;
 import com.rental_apps.android.rental_apps.model.model_user.DataUser;
 import com.rental_apps.android.rental_apps.model.model_user.ResponseUser;
 import com.rental_apps.android.rental_apps.myinterface.InitComponent;
-import com.rental_apps.android.rental_apps.utils.move;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,40 +39,37 @@ import retrofit2.Response;
  * Created by Muhajir on 30/09/2017.
  */
 
-public class AdminListUser extends Fragment implements InitComponent {
+public class AdminListTransaksi extends Fragment implements InitComponent {
     //Declate Toolbar Tittle
     private static final String TEXT_FRAGMENT = "RENTCAR";
-    private static final String GroupUser="GroupUser";
+
     //Declare Component View
     private TextView mTxtTitle;
     private View rootView;
-    private RecyclerView recyclerUsers;
-
+    private RecyclerView recyclerTransaksi;
     //Declate Activity Context
     Context mContext;
 
-    //Declare Object Users
-    ResponseUser dataUsers;
-    List<DataUser> listUsers=new ArrayList<>();
+    //Declare Object Transaksi
+    ResponseTransaksi dataTransaksi;
+    List<DataTransaksi> listTransaksi=new ArrayList<>();
 
     //Declare Adapter
-    private UsersAdapter mAdapter;
+    private TransaksiAdapter mAdapter;
 
-    public AdminListUser newInstance(String text,String gUser){
-        AdminListUser mFragment = new AdminListUser();
+    public static AdminListTransaksi newInstance(String text){
+        AdminListTransaksi mFragment = new AdminListTransaksi();
         Bundle mBundle = new Bundle();
         mBundle.putString(TEXT_FRAGMENT, text);
-        mBundle.putString(GroupUser, gUser);
         mFragment.setArguments(mBundle);
         return mFragment;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         mContext=getActivity();
         // TODO Auto-generated method stub
-        rootView = inflater.inflate(R.layout.fragment_admin_user, container, false);
+        rootView = inflater.inflate(R.layout.fragment_admin_transaksi, container, false);
         startInit();
         return rootView;
     }
@@ -95,10 +94,10 @@ public class AdminListUser extends Fragment implements InitComponent {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.refresh:
-                getUsers();
+                getTransaksi();
                 return true;
             case R.id.add:
-                move.moveActivity(mContext,ActivityCreateAdmin.class);
+                Toasty.success(mContext, "Tambah", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -121,13 +120,13 @@ public class AdminListUser extends Fragment implements InitComponent {
     @Override
     public void initUI() {
         rootView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT ));
-        recyclerUsers= (RecyclerView)rootView.findViewById(R.id.rUserList);
+        recyclerTransaksi= (RecyclerView)rootView.findViewById(R.id.rTransaksiList);
     }
 
     @Override
     public void initValue() {
-        prepareUsers();
-        getUsers();
+        prepareTransaksi();
+        getTransaksi();
     }
 
     @Override
@@ -135,39 +134,40 @@ public class AdminListUser extends Fragment implements InitComponent {
 
     }
 
-    public void getUsers(){
-        final Call<ResponseUser> users= client.getApi().dataUser(Integer.parseInt(getArguments().getString(GroupUser)),0);
-        users.enqueue(new Callback<ResponseUser>() {
+    public void getTransaksi(){
+        final Call<ResponseTransaksi> transaksi= client.getApi().dataTransaksi();
+        transaksi.enqueue(new Callback<ResponseTransaksi>() {
             @Override
-            public void onResponse(Call<ResponseUser> call, Response<ResponseUser> response) {
-                dataUsers=response.body();
+            public void onResponse(Call<ResponseTransaksi> call, Response<ResponseTransaksi> response) {
                 if (response.isSuccessful()) {
-                    if (dataUsers.getStatus()) {
-                        listUsers.clear();
-                        listUsers.addAll(dataUsers.getData());
+                    dataTransaksi=response.body();
+                    if (dataTransaksi.getStatus()) {
+                        listTransaksi.clear();
+                        listTransaksi.addAll(dataTransaksi.getData());
                         mAdapter.notifyDataSetChanged();
                     } else {
-                        Toasty.error(mContext, "Tidak Ada Data Ditemukan", Toast.LENGTH_LONG).show();
+                        Toasty.error(mContext, "gagal", Toast.LENGTH_LONG).show();
                     }
                 }else {
-                    Toasty.error(mContext, "Tidak Ada Data Ditemukan", Toast.LENGTH_LONG).show();
+                    Toasty.error(mContext, "gagal", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseUser> call, Throwable t) {
+            public void onFailure(Call<ResponseTransaksi> call, Throwable t) {
                 Toasty.error(mContext,t.getMessage(),Toast.LENGTH_LONG).show();
             }
+
         });
     }
 
-    private void prepareUsers(){
-        mAdapter = new UsersAdapter(listUsers);
-        recyclerUsers.setHasFixedSize(true);
-        recyclerUsers.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerUsers.setItemAnimator(new DefaultItemAnimator());
-        recyclerUsers.setAdapter(mAdapter);
-        recyclerUsers.setItemAnimator(new SlideLeftAlphaAnimator());
+    private void prepareTransaksi(){
+        mAdapter = new TransaksiAdapter(listTransaksi);
+        recyclerTransaksi.setHasFixedSize(true);
+        recyclerTransaksi.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerTransaksi.setItemAnimator(new DefaultItemAnimator());
+        recyclerTransaksi.setAdapter(mAdapter);
+        recyclerTransaksi.setItemAnimator(new SlideLeftAlphaAnimator());
 
     }
 

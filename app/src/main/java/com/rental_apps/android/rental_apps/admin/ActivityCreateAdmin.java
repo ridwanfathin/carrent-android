@@ -1,16 +1,17 @@
-package com.rental_apps.android.rental_apps;
+package com.rental_apps.android.rental_apps.admin;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import com.rental_apps.android.rental_apps.R;
 import com.rental_apps.android.rental_apps.api.client;
 import com.rental_apps.android.rental_apps.model.model_user.DataUser;
 import com.rental_apps.android.rental_apps.model.model_user.ResponseRegister;
@@ -23,10 +24,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by Muhajir on 03/09/2017.
+ * Created by Muhajir on 06/10/2017.
  */
-public class ActivityRegister extends AppCompatActivity implements InitComponent, View.OnClickListener{
 
+public class ActivityCreateAdmin extends AppCompatActivity implements InitComponent, View.OnClickListener {
     //declare component
     private EditText etNama;
     private EditText etUsername;
@@ -49,13 +50,15 @@ public class ActivityRegister extends AppCompatActivity implements InitComponent
 
     //declare sweet alert
     private SweetAlertDialog pDialog;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+    protected void onCreate(Bundle SavedInstance){
+        super.onCreate(SavedInstance);
+        setContentView(R.layout.activity_add_admin);
         mContext=this;
         startInit();
     }
+
 
     @Override
     public void startInit() {
@@ -67,7 +70,9 @@ public class ActivityRegister extends AppCompatActivity implements InitComponent
 
     @Override
     public void initToolbar() {
-        getSupportActionBar().hide();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Register Admin");
     }
 
     @Override
@@ -82,19 +87,29 @@ public class ActivityRegister extends AppCompatActivity implements InitComponent
         rbl=(RadioButton)findViewById(R.id.jkl);
         rbp=(RadioButton)findViewById(R.id.jkp);
         btnRegister=(Button)findViewById(R.id.btn_register);
-
     }
 
     @Override
     public void initValue() {
-
+        btnRegister.setOnClickListener(this);
+        rbl.setOnClickListener(this);
+        rbp.setOnClickListener(this);
     }
 
     @Override
     public void initEvent() {
-        btnRegister.setOnClickListener(this);
-        rbl.setOnClickListener(this);
-        rbp.setOnClickListener(this);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -124,13 +139,13 @@ public class ActivityRegister extends AppCompatActivity implements InitComponent
 
         Call<ResponseRegister> register;
         register = client.getApi().userRegister(etNama.getText().toString(),
-                                                etUsername.getText().toString(),
-                                                etEmail.getText().toString(),
-                                                etNumber.getText().toString(),
-                                                JK,
-                                                etAlamat.getText().toString(),
-                                                etPassword.getText().toString(),
-                                                1,2);
+                etUsername.getText().toString(),
+                etEmail.getText().toString(),
+                etNumber.getText().toString(),
+                JK,
+                etAlamat.getText().toString(),
+                etPassword.getText().toString(),
+                1,1);
 
         register.enqueue(new Callback<ResponseRegister>() {
 
@@ -170,12 +185,12 @@ public class ActivityRegister extends AppCompatActivity implements InitComponent
 
     private Boolean validasi(){
         if (!validate.cek(etNama)
-         &&!validate.cek(etUsername)
-         &&!validate.cek(etEmail)
-         &&!validate.cek(etNumber)
-         &&!validate.cek(etAlamat)
-         &&!validate.cek(etPassword)
-         &&!validate.cek(etConfirmPassword)) {
+                &&!validate.cek(etUsername)
+                &&!validate.cek(etEmail)
+                &&!validate.cek(etNumber)
+                &&!validate.cek(etAlamat)
+                &&!validate.cek(etPassword)
+                &&!validate.cek(etConfirmPassword)) {
             if (validate.cekPassword(etConfirmPassword,etPassword.getText().toString(),etConfirmPassword.getText().toString())){
                 return false;
             }else{

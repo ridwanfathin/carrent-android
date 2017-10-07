@@ -16,14 +16,18 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.rental_apps.android.rental_apps.R;
 import com.rental_apps.android.rental_apps.admin.ActivityDetailCars;
+import com.rental_apps.android.rental_apps.api.client;
 import com.rental_apps.android.rental_apps.helper.DrawableColor;
 import com.rental_apps.android.rental_apps.model.model_mobil.DataCars;
 import com.rental_apps.android.rental_apps.utils.move;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
 import java.io.Serializable;
 import java.util.List;
+
+import es.dmoral.toasty.Toasty;
 
 /**
  * Created by Muhajir on 30/09/2017.
@@ -45,6 +49,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.MyViewHolder>{
         private ImageView ic_color;
         private ImageView ic_capacity;
         private ImageView ic_bensin;
+        private ImageView imgCar;
         private View view;
 
         public MyViewHolder(View view) {
@@ -61,6 +66,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.MyViewHolder>{
             ic_color=(ImageView)view.findViewById(R.id.ic_color);
             ic_capacity=(ImageView)view.findViewById(R.id.ic_capacity);
             ic_bensin=(ImageView)view.findViewById(R.id.ic_bensin);
+            imgCar=(ImageView)view.findViewById(R.id.imgCar);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -88,6 +94,12 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.MyViewHolder>{
             else {
                 status.setText("Tersedia");
             }
+
+            if (cars.getIMAGE().size()>0)
+                Picasso.with(view.getContext()).load(client.getBaseImg()+"mobil/"+cars.getIMAGE().get(0)).into(imgCar);
+
+
+
             Drawable yearIcon= ContextCompat.getDrawable(view.getContext(), R.drawable.ic_action_go_to_today);
             Drawable capacityIcon= ContextCompat.getDrawable(view.getContext(), R.drawable.ic_action_cc_bcc);
             Drawable colorIcon= ContextCompat.getDrawable(view.getContext(), R.drawable.ic_action_picture);

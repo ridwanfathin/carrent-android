@@ -13,9 +13,11 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.rental_apps.android.rental_apps.R;
+import com.rental_apps.android.rental_apps.api.client;
 import com.rental_apps.android.rental_apps.helper.DrawableColor;
 import com.rental_apps.android.rental_apps.model.model_mobil.DataCars;
 import com.rental_apps.android.rental_apps.myinterface.InitComponent;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -42,6 +44,8 @@ public class ActivityDetailCars extends AppCompatActivity implements InitCompone
     private ImageView ic_plat;
     private ImageView ic_warna_mobil;
     private ImageView ic_bensin_mobil;
+
+    private ImageView mainbackdrop;
 
     @Override
     protected void onCreate(Bundle SavedInstance) {
@@ -93,7 +97,7 @@ public class ActivityDetailCars extends AppCompatActivity implements InitCompone
         ic_capacity    =(ImageView)findViewById(R.id.ic_capacity);
         ic_warna_mobil =(ImageView)findViewById(R.id.ic_warna);
         ic_bensin_mobil=(ImageView)findViewById(R.id.ic_bensin);
-
+        mainbackdrop   =(ImageView)findViewById(R.id.mainbackdrop);
 
 
 
@@ -123,7 +127,8 @@ public class ActivityDetailCars extends AppCompatActivity implements InitCompone
         bensin_mobil.setText(car.getBENSINMOBIL());
         price.setText("Rp. "+String.format("%,.2f", Double.parseDouble(car.getHARGAMOBIL().toString())));
 
-
+        if (car.getIMAGE().size()>0)
+            Picasso.with(mContext).load(client.getBaseImg()+"mobil/"+car.getIMAGE().get(0)).into(mainbackdrop);
 
     }
 

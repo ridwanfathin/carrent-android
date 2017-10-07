@@ -2,103 +2,99 @@ package com.rental_apps.android.rental_apps.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.pixplicity.easyprefs.library.Prefs;
 import com.rental_apps.android.rental_apps.R;
-import com.rental_apps.android.rental_apps.SPreferenced.SPref;
 import com.rental_apps.android.rental_apps.admin.ActivityDetailUsers;
 import com.rental_apps.android.rental_apps.api.client;
-import com.rental_apps.android.rental_apps.helper.DrawableColor;
-import com.rental_apps.android.rental_apps.model.model_user.DataUser;
-import com.rental_apps.android.rental_apps.utils.move;
+import com.rental_apps.android.rental_apps.model.model_transaksi.DataTransaksi;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.io.Serializable;
 import java.util.List;
 
+import customfonts.MyTextView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Muhajir on 30/09/2017.
  */
 
-public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder>{
-    private List<DataUser> usersList;
+public class TransaksiAdapter extends RecyclerView.Adapter<TransaksiAdapter.MyViewHolder>{
+    private List<DataTransaksi> transaksiList;
     private Context mContext;
     private int lastPosition=0;
     private View mView;
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private View view;
-        private TextView name;
-        private TextView email;
-        private CircleImageView userImage;
+        private TextView kode_transaksi;
+        private TextView tanggal_pesanan;
+        private TextView nama_pemesan;
+        private TextView total_transaksi;
+        private LinearLayout bg_transaksi;
         public MyViewHolder(View view) {
             super(view);
             mView=view;
-            name=(TextView)view.findViewById(R.id.name);
-            email=(TextView)view.findViewById(R.id.email);
-            userImage=(CircleImageView)view.findViewById(R.id.userImage);
+            kode_transaksi=(TextView) view.findViewById(R.id.kode_transaksi);
+            tanggal_pesanan=(TextView) view.findViewById(R.id.tanggal_pesanan);
+            nama_pemesan=(TextView) view.findViewById(R.id.nama_pemesan);
+            total_transaksi=(TextView)view.findViewById(R.id.total_transaksi);
+            bg_transaksi=(LinearLayout) view.findViewById(R.id.bg_transaksi);
             this.view=view;
             mContext=view.getContext();
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Gson gson=new Gson();
-                    String user=gson.toJson(usersList.get(getAdapterPosition()));
+                    String user=gson.toJson(transaksiList.get(getAdapterPosition()));
                     Intent i=new Intent(mContext, ActivityDetailUsers.class);
-                    i.putExtra("user",user);
+                    i.putExtra("transaksi",user);
                     mContext.startActivity(i);
                 }
             });
         }
 
-        public void bindItem(DataUser users) {
-            name.setText(users.getName());
-            email.setText(users.getEmail());
-            if (!users.getPhoto().isEmpty())
-                Picasso.with(mContext)
-                    .load(client.getBaseUrlImage()+ users.getPhoto())
-                    .resize(250, 250)
-                    .centerCrop()
-                    .into(this.userImage);
+        public void bindItem(DataTransaksi transaksi) {
+            kode_transaksi.setText(transaksi.getKODETRANSAKSI());
+            tanggal_pesanan.setText(transaksi.getTGLORDER());
+            nama_pemesan.setText(transaksi.getNAME());
+            total_transaksi.setText("Rp. "+String.format("%,.2f", Double.parseDouble(transaksi.getTOTALPEMBAYARAN().toString())));
+
+            if (transaksi.getSTATUSPEMBAYARAN().equals("0")){
+                bg_transaksi.setBackgroundColor(Color.parseColor("#da4749"));
+            }
         }
     }
 
 
-    public UsersAdapter(List<DataUser> usersList) {
-        this.usersList = usersList;
+    public TransaksiAdapter(List<DataTransaksi> transaksiList) {
+        this.transaksiList= transaksiList;
     }
 
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.design_user,parent,false);
+        View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.design_transaksi,parent,false);
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.bindItem(usersList.get(position));
+        holder.bindItem(transaksiList.get(position));
         setAnimation(mView, position);
     }
 
     @Override
     public int getItemCount() {
-        return usersList.size();
+        return transaksiList.size();
     }
 
     private void setAnimation(View viewToAnimate,int position) {

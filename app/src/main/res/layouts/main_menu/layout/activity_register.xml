@@ -1,143 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     >
-    <ImageView
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#000"
         android:alpha="0.8"
-        />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="25dp"
         >
-        <View
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#fff"
-            android:alpha="0.7"
-            />
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="@dimen/activity_horizontal_margin"
             >
-            <android.support.design.widget.TextInputLayout
+            <EditText
+                android:id="@+id/et_nama"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/et_nama"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Nama"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
-                    />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/et_username"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Username"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
-
-                    />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/et_no_telp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="No.Telp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
-                    />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/et_alamat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Alamat"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
-
-                    />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/et_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Email"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
-                    />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/et_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Password"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
-
-                    />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/et_confirm_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Confirm Password"
-                    />
-            </android.support.design.widget.TextInputLayout>
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
-                android:text="Jenis Kelamin"
+                android:hint="Nama"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:background="@drawable/squarewhite"
+                android:padding="15dp"
+                android:layout_marginBottom="5dp"
                 />
-            <LinearLayout
+            <EditText
+                android:id="@+id/et_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <RadioButton
-                    android:id="@+id/jkl"
-                    android:paddingTop="5sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Laki-laki"
-                    />
-                <RadioButton
-                    android:id="@+id/jkp"
-                    android:paddingTop="5sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Perempuan"
-                    />
-            </LinearLayout>
+                android:hint="Username"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:background="@drawable/squarewhite"
+                android:padding="15dp"
+                android:layout_marginBottom="5dp"
+                />
+            <EditText
+                android:id="@+id/et_no_telp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="No Telp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:background="@drawable/squarewhite"
+                android:padding="15dp"
+                android:layout_marginBottom="5dp"
+                />
+            <EditText
+                android:id="@+id/et_alamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Alamat"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:background="@drawable/squarewhite"
+                android:padding="15dp"
+                android:layout_marginBottom="5dp"
+                />
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:background="@drawable/squarewhite"
+                android:padding="15dp"
+                android:layout_marginBottom="5dp"
+                />
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:background="@drawable/squarewhite"
+                android:padding="15dp"
+                android:layout_marginBottom="5dp"
+                />
+            <EditText
+                android:id="@+id/et_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Confirm Password"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:background="@drawable/squarewhite"
+                android:padding="15dp"
+                android:layout_marginBottom="5dp"
+                />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/squarewhite"
+    android:layout_marginBottom="15sp"
+    >
+    <customfonts.MyTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="Jenis Kelamin"
+        android:textColor="@color/white"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <RadioButton
+            android:id="@+id/jkl"
+            android:paddingTop="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Laki-laki"
+            android:textColor="@color/white"
+            android:layout_margin="10dp"
+            />
+        <RadioButton
+            android:id="@+id/jkp"
+            android:paddingTop="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Perempuan"
+            android:textColor="@color/white"
+            android:layout_margin="10dp"
+            />
+    </LinearLayout>
+</LinearLayout>
+
             <Button
                 android:id="@+id/btn_register"
                 android:layout_width="match_parent"
@@ -149,5 +150,6 @@
 
         </LinearLayout>
     </RelativeLayout>
+    </RelativeLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

@@ -1,6 +1,8 @@
 package com.rental_apps.android.rental_apps.admin;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -57,6 +59,9 @@ public class ActivityDetailUsers extends AppCompatActivity implements InitCompon
     public void initToolbar() {
         toolbar=(Toolbar)findViewById(R.id.maintoolbar);
         setSupportActionBar(toolbar);
+        final Drawable upArrow = getResources().getDrawable(R.drawable.ic_action_back);
+        upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        getSupportActionBar().setHomeAsUpIndicator(upArrow);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("");
@@ -91,7 +96,11 @@ public class ActivityDetailUsers extends AppCompatActivity implements InitCompon
             status.setText("Aktif");
         else
             status.setText("Tidak Aktif");
-        Picasso.with(mContext).load(client.getBaseUrlImage()+user.getPhoto()).into(userPhoto);
+
+        if(!user.getPhoto().isEmpty())
+            Picasso.with(mContext).load(client.getBaseUrlImage()+user.getPhoto()).into(userPhoto);
+
+
     }
 
     @Override

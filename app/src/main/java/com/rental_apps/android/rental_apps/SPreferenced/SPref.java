@@ -15,6 +15,15 @@ public class SPref {
     private static String LAST_UPDATE="LAST_UPDATE";
     private static String ALAMAT="ALAMAT";
     private static String GROUP_USER="GROUP_USER";
+    private static String PASSWORD="PASSWORD";
+
+    public static String getPASSWORD() {
+        return PASSWORD;
+    }
+
+    public static void setPASSWORD(String PASSWORD) {
+        SPref.PASSWORD = PASSWORD;
+    }
 
     public static String getIdUser() {
         return ID_USER;

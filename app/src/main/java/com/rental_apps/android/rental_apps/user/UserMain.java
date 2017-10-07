@@ -1,4 +1,4 @@
-package com.rental_apps.android.rental_apps.admin;
+package com.rental_apps.android.rental_apps.user;
 
 import android.support.v4.app.Fragment;
 
@@ -31,17 +31,17 @@ import es.dmoral.toasty.Toasty;
  * Created by Muhajir on 29/09/2017.
  */
 
-public class AdminMain extends NavigationLiveo implements OnItemClickListener {
+public class UserMain extends NavigationLiveo implements OnItemClickListener {
     Context mContext;
     private HelpLiveo mHelpLiveo;
-    AdminListUser adminListUser;
+//    AdminListUser adminListUser;
 
     @Override
     public void onInt(Bundle savedInstanceState) {
 
         mContext=this;
         // User Information
-        adminListUser=new AdminListUser();
+//        adminListUser=new AdminListUser();
         this.userName.setText(Prefs.getString(SPref.getNAME(),""));
         this.userEmail.setText(Prefs.getString(SPref.getEMAIL(),""));
         this.userBackground.setImageResource(R.drawable.bg_drawer);
@@ -73,7 +73,7 @@ public class AdminMain extends NavigationLiveo implements OnItemClickListener {
                 .footerSecondIconColor(R.color.colorAccent)
                 .setOnClickUser(onClickPhoto)
                 .setOnPrepareOptionsMenu(onPrepare)
-                .setOnClickFooter(onClickProfile)
+                .setOnClickFooter(onClickFooter)
                 .setOnClickFooterSecond(onClickFooter)
                 .build();
 
@@ -88,19 +88,19 @@ public class AdminMain extends NavigationLiveo implements OnItemClickListener {
 
         switch (position){
             case 0:
-                mFragment = AdminListCart.newInstance(mHelpLiveo.get(position).getName());
+//                mFragment = AdminListCart.newInstance(mHelpLiveo.get(position).getName());
                 break;
             case 1:
-                mFragment = AdminListTransaksi.newInstance(mHelpLiveo.get(position).getName());
+//                mFragment = AdminListTransaksi.newInstance(mHelpLiveo.get(position).getName());
                 break;
             case 2:
-                mFragment = AdminListCart.newInstance(mHelpLiveo.get(position).getName());
+//                mFragment = AdminListCart.newInstance(mHelpLiveo.get(position).getName());
                 break;
             case 3:
-                mFragment = adminListUser.newInstance(mHelpLiveo.get(position).getName(),"2");
+//                mFragment = adminListUser.newInstance(mHelpLiveo.get(position).getName(),"2");
                 break;
             case 4:
-                mFragment = adminListUser.newInstance(mHelpLiveo.get(position).getName(),"1");
+//                mFragment = adminListUser.newInstance(mHelpLiveo.get(position).getName(),"1");
                 break;
         }
         if (mFragment != null){
@@ -128,14 +128,6 @@ public class AdminMain extends NavigationLiveo implements OnItemClickListener {
         public void onClick(View v) {
             Prefs.clear();
             move.moveActivity(mContext,ActivityLogin.class);
-        }
-    };
-
-    private View.OnClickListener onClickProfile= new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            closeDrawer();
-            move.moveActivity(mContext,AdminEditProfile.class);
         }
     };
 

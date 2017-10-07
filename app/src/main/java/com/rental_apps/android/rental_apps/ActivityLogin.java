@@ -18,6 +18,7 @@ import com.rental_apps.android.rental_apps.api.client;
 import com.rental_apps.android.rental_apps.model.model_user.DataUser;
 import com.rental_apps.android.rental_apps.model.model_user.ResponseLogin;
 import com.rental_apps.android.rental_apps.myinterface.InitComponent;
+import com.rental_apps.android.rental_apps.user.UserMain;
 import com.rental_apps.android.rental_apps.utils.move;
 import com.rental_apps.android.rental_apps.utils.validate;
 
@@ -132,7 +133,10 @@ public class ActivityLogin extends AppCompatActivity implements InitComponent, V
                         Toasty.success(mContext,"login berhasil",Toast.LENGTH_LONG).show();
                         Log.d("data user",userData.toString());
                         setPreference(userData);
-                        move.moveActivity(mContext,AdminMain.class);
+                        if (userData.getGroup_user().equals(1))
+                            move.moveActivity(mContext,AdminMain.class);
+                        else
+                            move.moveActivity(mContext,UserMain.class);
                         finish();
                     }else{
                         Toasty.error(mContext,"Username dan password salah",Toast.LENGTH_LONG).show();
@@ -164,6 +168,7 @@ public class ActivityLogin extends AppCompatActivity implements InitComponent, V
         Prefs.putString(SPref.getLastUpdate(),du.getLast_update().toString());
         Prefs.putString(SPref.getALAMAT(),du.getAlamat());
         Prefs.putInt(SPref.getGroupUser(),du.getGroup_user());
+        Prefs.putString(SPref.getPASSWORD(),du.getPassword().toString());
     }
 
 

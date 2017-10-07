@@ -4,7 +4,7 @@
     <color name="colorPrimary">#568AB7</color>
     <color name="colorPrimaryDark">#4576a1</color>
     <color name="colorPrimaryLight">#709cc2</color>
-
+    <color name="bgTransaksiRed">#da4749</color>
     <color name="colorAccent">#E6C14D</color>
     <color name="colorAccentDark">#C4A035</color>
     <color name="colorAccentLight">#FEEAAB</color>
