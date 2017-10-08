@@ -7,9 +7,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Muhajir on 03/09/2017.
  */
 public class client {
-    private  static  final  String BASE_URL="http://192.168.8.102/rental-api/";
-    private  static  final  String BASE_URL_IMAGE="http://192.168.8.102/rental-api/upload/avatars/";
-    private  static  final  String BASE_URL_IMG="http://192.168.8.102/rental-api/upload/";
+    private  static  final  String BASE_URL="http://192.168.43.223/rental-api/";
+    private  static  final  String BASE_URL_IMAGE="http://192.168.43.223/rental-api/upload/avatars/";
+    private  static  final  String BASE_URL_IMG="http://192.168.43.223/rental-api/upload/";
 
     public static request getApi() {
         //Builder Retrofit

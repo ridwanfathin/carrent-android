@@ -1,10 +1,9 @@
-package com.rental_apps.android.rental_apps.admin;
+package com.rental_apps.android.rental_apps.user;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,14 +14,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Toast;
 
 import com.mikepenz.itemanimators.SlideLeftAlphaAnimator;
 import com.rental_apps.android.rental_apps.R;
 import com.rental_apps.android.rental_apps.adapter.CarsAdapter;
+import com.rental_apps.android.rental_apps.adapter.CarsUserAdapter;
+import com.rental_apps.android.rental_apps.admin.ActivityCreateMobil;
 import com.rental_apps.android.rental_apps.api.client;
-import com.rental_apps.android.rental_apps.helper.DrawableCounter;
 import com.rental_apps.android.rental_apps.model.model_mobil.DataCars;
 import com.rental_apps.android.rental_apps.model.model_mobil.ResponseCars;
 import com.rental_apps.android.rental_apps.myinterface.InitComponent;
@@ -37,10 +36,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by Muhajir on 30/09/2017.
+ * Created by Muhajir on 08/10/2017.
  */
 
-public class AdminListCart extends Fragment implements InitComponent {
+
+public class UserListCars extends Fragment implements InitComponent{
+
     //Declate Toolbar Tittle
     private static final String TEXT_FRAGMENT = "RENTCAR";
 
@@ -56,10 +57,10 @@ public class AdminListCart extends Fragment implements InitComponent {
     List<DataCars> listCars=new ArrayList<>();
 
     //Declare Adapter
-    private CarsAdapter mAdapter;
+    private CarsUserAdapter mAdapter;
 
-    public static AdminListCart newInstance(String text){
-        AdminListCart mFragment = new AdminListCart();
+    public static com.rental_apps.android.rental_apps.admin.AdminListCart newInstance(String text){
+        com.rental_apps.android.rental_apps.admin.AdminListCart mFragment = new com.rental_apps.android.rental_apps.admin.AdminListCart();
         Bundle mBundle = new Bundle();
         mBundle.putString(TEXT_FRAGMENT, text);
         mFragment.setArguments(mBundle);
@@ -67,7 +68,7 @@ public class AdminListCart extends Fragment implements InitComponent {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContext=getActivity();
         // TODO Auto-generated method stub
         rootView = inflater.inflate(R.layout.fragment_admin_cars, container, false);
@@ -136,7 +137,7 @@ public class AdminListCart extends Fragment implements InitComponent {
 
     @Override
     public void initUI() {
-        rootView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT ));
+        rootView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT ));
         recyclerCars = (RecyclerView)rootView.findViewById(R.id.rCarList);
 
 
@@ -180,7 +181,7 @@ public class AdminListCart extends Fragment implements InitComponent {
     }
 
     private void prepareCars(){
-        mAdapter = new CarsAdapter(listCars);
+        mAdapter = new CarsUserAdapter(listCars);
         recyclerCars.setHasFixedSize(true);
         recyclerCars.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerCars.setItemAnimator(new DefaultItemAnimator());

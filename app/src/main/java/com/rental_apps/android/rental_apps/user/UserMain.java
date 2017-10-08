@@ -16,6 +16,7 @@ import com.pixplicity.easyprefs.library.Prefs;
 import com.rental_apps.android.rental_apps.ActivityLogin;
 import com.rental_apps.android.rental_apps.R;
 import com.rental_apps.android.rental_apps.SPreferenced.SPref;
+import com.rental_apps.android.rental_apps.admin.AdminEditProfile;
 import com.rental_apps.android.rental_apps.api.client;
 import com.rental_apps.android.rental_apps.myinterface.InitComponent;
 import com.rental_apps.android.rental_apps.utils.move;
@@ -52,11 +53,8 @@ public class UserMain extends NavigationLiveo implements OnItemClickListener {
                 .into(this.userPhoto);
 
         mHelpLiveo = new HelpLiveo();
-        mHelpLiveo.add(getString(R.string.dashboard), R.drawable.ic_action_dock);
-        mHelpLiveo.add(getString(R.string.pesanan), R.drawable.ic_action_email,10);
+        mHelpLiveo.add("History Transaksi", R.drawable.ic_action_dock);
         mHelpLiveo.add(getString(R.string.mobil), R.drawable.ic_nav_transport,10);
-        mHelpLiveo.add(getString(R.string.user), R.drawable.ic_action_person);
-        mHelpLiveo.add(getString(R.string.admin), R.drawable.ic_action_cc_bcc);
 
         with(this).startingPosition(0)
                 .addAllHelpItem(mHelpLiveo.getHelp())
@@ -73,7 +71,7 @@ public class UserMain extends NavigationLiveo implements OnItemClickListener {
                 .footerSecondIconColor(R.color.colorAccent)
                 .setOnClickUser(onClickPhoto)
                 .setOnPrepareOptionsMenu(onPrepare)
-                .setOnClickFooter(onClickFooter)
+                .setOnClickFooter(onClickProfile)
                 .setOnClickFooterSecond(onClickFooter)
                 .build();
 
@@ -91,7 +89,7 @@ public class UserMain extends NavigationLiveo implements OnItemClickListener {
 //                mFragment = AdminListCart.newInstance(mHelpLiveo.get(position).getName());
                 break;
             case 1:
-//                mFragment = AdminListTransaksi.newInstance(mHelpLiveo.get(position).getName());
+                mFragment = UserListCars.newInstance(mHelpLiveo.get(position).getName());
                 break;
             case 2:
 //                mFragment = AdminListCart.newInstance(mHelpLiveo.get(position).getName());
@@ -130,6 +128,16 @@ public class UserMain extends NavigationLiveo implements OnItemClickListener {
             move.moveActivity(mContext,ActivityLogin.class);
         }
     };
+
+    private View.OnClickListener onClickProfile= new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            closeDrawer();
+            move.moveActivity(mContext,AdminEditProfile.class);
+        }
+    };
+
+
 
 
 }

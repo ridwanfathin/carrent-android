@@ -317,12 +317,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/nliveo_orange_colorPrimaryDark"
-        android:padding="10sp"
+        android:padding="20sp"
         android:text="Rp. 100.000"
         android:textColor="@color/white"
         android:textAlignment="center"
         />
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/action_mobil"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_margin="@dimen/activity_horizontal_margin"

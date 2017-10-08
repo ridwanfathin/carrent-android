@@ -1,9 +1,5 @@
 package com.rental_apps.android.rental_apps.admin;
 
-/**
- * Created by Muhajir on 07/10/2017.
- */
-
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -13,96 +9,94 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.pixplicity.easyprefs.library.Prefs;
 import com.rental_apps.android.rental_apps.R;
-import com.rental_apps.android.rental_apps.SPreferenced.SPref;
 import com.rental_apps.android.rental_apps.api.client;
-import com.rental_apps.android.rental_apps.helper.Hash;
+import com.rental_apps.android.rental_apps.model.model_mobil.ResponseRegisterCars;
 import com.rental_apps.android.rental_apps.model.model_user.DataUser;
 import com.rental_apps.android.rental_apps.model.model_user.ResponseRegister;
 import com.rental_apps.android.rental_apps.myinterface.InitComponent;
 import com.rental_apps.android.rental_apps.utils.validate;
-import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import customfonts.MyEditText;
-import customfonts.MyTextView;
-import de.hdodenhof.circleimageview.CircleImageView;
-import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by Muhajir on 01/10/2017.
+ * Created by Muhajir on 06/10/2017.
  */
 
-public class AdminEditProfile extends AppCompatActivity implements InitComponent, View.OnClickListener {
-    private MyEditText name;
-    private MyEditText email;
-    private MyEditText noTelp;
-    private MyEditText address;
-    private MyEditText jenis_kelamin;
-    private MyEditText status;
-    private MyEditText username;
-    private MyEditText old_password;
-    private MyEditText new_password;
-    private MyEditText confirm_password;
+public class ActivityCreateMobil extends AppCompatActivity implements InitComponent, View.OnClickListener {
+    //declare component
+    private EditText et_nama_mobil;
+    private EditText et_merk_mobil;
+    private EditText et_deskripsi_mobil;
+    private EditText et_tahun;
+    private EditText et_kapasitas;
+    private EditText et_harga_sewa;
+    private EditText et_warna_mobil;
+    private Spinner sp_bensin;
+    private EditText et_plat;
+    private RadioButton raktif;
+    private RadioButton rtidakaktif;
+    private Button btnRegister;
+    private Button take;
+    private ImageView imgshow;
+    private CoordinatorLayout coordinatorLayout;
 
-    private CircleImageView userPhoto;
+    //declare context
+    private Context mContext;
 
-    private Button update;
+    //declare variable
+    private DataUser userData;
 
+    //declare sweet alert
     private SweetAlertDialog pDialog;
 
-    private String JK;
+    private Integer statusAktif=0;
 
-    Context mContext;
-    Toolbar toolbar;
-    DataUser user;
-
-    private Boolean ket=false;
-
+    private int ketImage=0;
+    String filePath="";
     Uri selectedImage;
+
     private static final int REQUEST_CAMERA = 1888;
     private static final int SELECT_FILE = 1887;
     private static final int PICK_FROM_GALLERY = 2;
-    String filePath="";
+
     private String encodedImage=null;
     @Override
     protected void onCreate(Bundle SavedInstance){
         super.onCreate(SavedInstance);
-        setContentView(R.layout.activity_edit_user);
-
-        Gson gson = new Gson();
-        user= gson.fromJson(getIntent().getStringExtra("user"), DataUser.class);
-
+        setContentView(R.layout.activity_add_mobil);
         mContext=this;
         startInit();
     }
+
 
     @Override
     public void startInit() {
@@ -114,87 +108,47 @@ public class AdminEditProfile extends AppCompatActivity implements InitComponent
 
     @Override
     public void initToolbar() {
-        toolbar=(Toolbar)findViewById(R.id.maintoolbar);
-        setSupportActionBar(toolbar);
-        final Drawable upArrow = getResources().getDrawable(R.drawable.ic_action_back);
-        upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
-        getSupportActionBar().setHomeAsUpIndicator(upArrow);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("Register Mobil");
     }
 
     @Override
     public void initUI() {
-        name=(MyEditText)findViewById(R.id.name);
-        email=(MyEditText)findViewById(R.id.email);
-        noTelp=(MyEditText)findViewById(R.id.notelp);
-        address=(MyEditText)findViewById(R.id.address);
-        jenis_kelamin=(MyEditText)findViewById(R.id.jenis_kelamin);
-        status=(MyEditText)findViewById(R.id.status);
-        username=(MyEditText)findViewById(R.id.username);
-        old_password=(MyEditText)findViewById(R.id.old_password);
-        new_password=(MyEditText)findViewById(R.id.password);
-        confirm_password=(MyEditText)findViewById(R.id.confirm_password);
-        userPhoto=(CircleImageView)findViewById(R.id.userPhoto);
-        update=(Button)findViewById(R.id.btn_update);
-
+        et_nama_mobil=(EditText)findViewById(R.id.et_nama_mobil);
+        et_merk_mobil=(EditText)findViewById(R.id.et_merk_mobil);
+        et_deskripsi_mobil=(EditText)findViewById(R.id.et_deskripsi_mobil);
+        et_tahun=(EditText)findViewById(R.id.et_tahun);
+        et_kapasitas=(EditText)findViewById(R.id.et_kapasitas);
+        et_harga_sewa=(EditText)findViewById(R.id.et_harga_sewa);
+        et_warna_mobil=(EditText)findViewById(R.id.et_warna_mobil);
+        sp_bensin=(Spinner)findViewById(R.id.sp_bensin);
+        et_plat=(EditText)findViewById(R.id.et_plat);
+        raktif=(RadioButton)findViewById(R.id.raktif);
+        rtidakaktif=(RadioButton)findViewById(R.id.rtidakaktif);
+        imgshow=(ImageView)findViewById(R.id.imgshow);
+        btnRegister=(Button)findViewById(R.id.btn_register);
+        take=(Button)findViewById(R.id.take);
     }
-
 
     @Override
     public void initValue() {
 
-        name.setText(Prefs.getString(SPref.getNAME(),""));
-        email.setText(Prefs.getString(SPref.getEMAIL(),""));
-        noTelp.setText(Prefs.getString(SPref.getNoTelp(),""));
-        address.setText(Prefs.getString(SPref.getALAMAT(),""));
-        username.setText(Prefs.getString(SPref.getUSERNAME(),""));
-        JK=Prefs.getString(SPref.getJenisKelamin(),"");
-        if (Prefs.getString(SPref.getJenisKelamin(),"").equals('L')){
-            jenis_kelamin.setText("Laki-laki");
-        }else{
-            jenis_kelamin.setText("Perempuan");
-        }
-
-        status.setText("Aktif");
-
-        if(!Prefs.getString(SPref.getPHOTO(),null).isEmpty())
-            Picasso.with(mContext).load(client.getBaseUrlImage()+Prefs.getString(SPref.getPHOTO(),null)).into(userPhoto);
-
-
+        List<String>adapter=new ArrayList<>();
+        adapter.add("Premium");
+        adapter.add("Pertalite");
+        adapter.add("Pertamax");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, adapter);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_bensin.setAdapter(dataAdapter);
     }
 
     @Override
     public void initEvent() {
-        old_password.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-                if (!Hash.MD5(old_password.getText().toString()).equals(Prefs.getString(SPref.getPASSWORD(),""))){
-                    View focusView = null;
-                    old_password.setError("Password tidak sama");
-                    focusView = old_password;
-                    focusView.requestFocus();
-                    ket=false;
-                }else{
-                    ket=true;
-                }
-            }
-        });
-
-        update.setOnClickListener(this);
-        userPhoto.setOnClickListener(this);
+        btnRegister.setOnClickListener(this);
+        raktif.setOnClickListener(this);
+        rtidakaktif.setOnClickListener(this);
+        take.setOnClickListener(this);
     }
 
     @Override
@@ -215,20 +169,16 @@ public class AdminEditProfile extends AppCompatActivity implements InitComponent
                 if(validasi())
                     register();
                 break;
-            case R.id.userPhoto:
+            case R.id.raktif:
+                statusAktif=1;
+                rtidakaktif.setChecked(false);
+                break;
+            case R.id.rtidakaktif:
+                statusAktif=0;
+                raktif.setChecked(false);
+                break;
+            case R.id.take:
                 ChooseGallerOrCamera();
-                break;
-            case R.id.jkl:
-                JK="L";
-//                rbp.setChecked(false);
-                break;
-            case R.id.jkp:
-                JK="P";
-//                rbl.setChecked(false);
-                break;
-            case R.id.btn_update:
-                if(validasi())
-                    register();
                 break;
         }
     }
@@ -240,46 +190,60 @@ public class AdminEditProfile extends AppCompatActivity implements InitComponent
         pDialog.setCancelable(false);
         pDialog.show();
 
-        Call<ResponseRegister> register;
-//        Toasty.success(mContext,Prefs.getString(SPref.getIdUser(),""),Toast.LENGTH_SHORT).show();
 
-        register = client.getApi().userUpdate(""+Prefs.getInt(SPref.getIdUser(),0),name.getText().toString(),
-                username.getText().toString(),
-                email.getText().toString(),
-                noTelp.getText().toString(),
-                JK,
-                address.getText().toString(),
-                new_password.getText().toString(),
-                1,1,encodedImage);
+        et_nama_mobil=(EditText)findViewById(R.id.et_nama_mobil);
+        et_merk_mobil=(EditText)findViewById(R.id.et_merk_mobil);
+        et_deskripsi_mobil=(EditText)findViewById(R.id.et_deskripsi_mobil);
+        et_tahun=(EditText)findViewById(R.id.et_tahun);
+        et_kapasitas=(EditText)findViewById(R.id.et_kapasitas);
+        et_harga_sewa=(EditText)findViewById(R.id.et_harga_sewa);
+        et_warna_mobil=(EditText)findViewById(R.id.et_warna_mobil);
+        sp_bensin=(Spinner)findViewById(R.id.sp_bensin);
+        et_plat=(EditText)findViewById(R.id.et_plat);
+        raktif=(RadioButton)findViewById(R.id.raktif);
+        rtidakaktif=(RadioButton)findViewById(R.id.rtidakaktif);
 
-        register.enqueue(new Callback<ResponseRegister>() {
+
+        Call<ResponseRegisterCars> register;
+        register = client.getApi().mobilRegister(et_nama_mobil.getText().toString(),
+                et_merk_mobil.getText().toString(),
+                et_deskripsi_mobil.getText().toString(),
+                et_tahun.getText().toString(),
+                et_kapasitas.getText().toString(),
+                et_harga_sewa.getText().toString(),
+                et_warna_mobil.getText().toString(),
+                sp_bensin.getSelectedItemPosition()+1,
+                et_plat.getText().toString(),
+                ""+statusAktif,
+                encodedImage);
+
+        register.enqueue(new Callback<ResponseRegisterCars>() {
 
             @Override
-            public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
+            public void onResponse(Call<ResponseRegisterCars> call, Response<ResponseRegisterCars> response) {
                 pDialog.hide();
                 if (response.isSuccessful()){
                     if (response.body().getStatus()) {
                         new SweetAlertDialog(mContext, SweetAlertDialog.SUCCESS_TYPE)
                                 .setTitleText("Info")
-                                .setContentText("Akun Berhasil Di Update!")
+                                .setContentText("Data Mobil Berhasil Di Buat!")
                                 .show();
-                        setPreference(response.body().getData());
                     }else {
                         new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
                                 .setTitleText("Info")
-                                .setContentText("Akun Gagal Di Update!")
+                                .setContentText("Data Mobil Gagal Di Buat!")
                                 .show();
                     }
                 }else{
                     new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
                             .setTitleText("Info")
-                            .setContentText("Akun Gagal Di Update!")
+                            .setContentText("Data Mobil Gagal Di Buat!")
                             .show();
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseRegister> call, Throwable t) {
+            public void onFailure(Call<ResponseRegisterCars> call, Throwable t) {
                 pDialog.hide();
                 new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
                         .setTitleText("Oops...")
@@ -290,32 +254,19 @@ public class AdminEditProfile extends AppCompatActivity implements InitComponent
     }
 
     private Boolean validasi(){
-        if (!validate.cek(name)
-                &&!validate.cek(username)
-                &&!validate.cek(email)
-                &&!validate.cek(noTelp)
-                &&!validate.cek(address)
-                &&!validate.cek(old_password)&&ket) {
-            if (validate.cekPassword(confirm_password,new_password.getText().toString(),confirm_password.getText().toString())){
-                return false;
-            }else{
-                return true;
-            }
-        } else{ return false; }
-    }
 
-    private void setPreference(DataUser du){
-        Prefs.putInt(SPref.getIdUser(),du.getId_user());
-        Prefs.putString(SPref.getUSERNAME(),du.getUsername());
-        Prefs.putString(SPref.getNAME(),du.getName());
-        Prefs.putString(SPref.getEMAIL(),du.getEmail());
-        Prefs.putString(SPref.getNoTelp(),du.getNo_telp());
-        Prefs.putString(SPref.getJenisKelamin(),du.getJenis_kelamin().toString());
-        Prefs.putString(SPref.getPHOTO(),du.getPhoto());
-        Prefs.putString(SPref.getLastUpdate(),du.getLast_update().toString());
-        Prefs.putString(SPref.getALAMAT(),du.getAlamat());
-        Prefs.putInt(SPref.getGroupUser(),du.getGroup_user());
-        Prefs.putString(SPref.getPASSWORD(),du.getPassword().toString());
+
+        if (!validate.cek(et_nama_mobil)
+                &&!validate.cek(et_merk_mobil)
+                &&!validate.cek(et_deskripsi_mobil)
+                &&!validate.cek(et_tahun)
+                &&!validate.cek(et_kapasitas)
+                &&!validate.cek(et_harga_sewa)
+                &&!validate.cek(et_warna_mobil)
+                &&!validate.cek(et_plat)) {
+
+                return true;
+        } else{ return false; }
     }
 
     private void ChooseGallerOrCamera() {
@@ -436,7 +387,6 @@ public class AdminEditProfile extends AppCompatActivity implements InitComponent
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
         byte[] ba = baos.toByteArray();
         encodedImage = Base64.encodeToString(ba, Base64.DEFAULT);
-
         if(imgFile.exists()){
 
             BitmapFactory.Options o = new BitmapFactory.Options();
@@ -482,7 +432,7 @@ public class AdminEditProfile extends AppCompatActivity implements InitComponent
 //                    tampil_gambar_master_kk.setImageBitmap(b);
 //                    listOfImagesPath.set(4,filepath);
 //                }
-                userPhoto.setImageBitmap(b);
+                imgshow.setImageBitmap(b);
 
                 fis.close();
             } catch (IOException e) {
@@ -496,4 +446,3 @@ public class AdminEditProfile extends AppCompatActivity implements InitComponent
 
 
 }
-

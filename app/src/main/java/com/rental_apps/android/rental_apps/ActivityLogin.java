@@ -62,6 +62,10 @@ public class ActivityLogin extends AppCompatActivity implements InitComponent, V
             move.moveActivity(mContext,AdminMain.class);
             finish();
         }
+        if (Prefs.getInt(SPref.getGroupUser(),0)==2){
+            move.moveActivity(mContext,UserMain.class);
+            finish();
+        }
         initToolbar();
         initUI();
         initValue();

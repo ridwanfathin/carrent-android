@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,21 +18,16 @@ import com.rental_apps.android.rental_apps.admin.ActivityDetailCars;
 import com.rental_apps.android.rental_apps.api.client;
 import com.rental_apps.android.rental_apps.helper.DrawableColor;
 import com.rental_apps.android.rental_apps.model.model_mobil.DataCars;
-import com.rental_apps.android.rental_apps.utils.move;
+import com.rental_apps.android.rental_apps.user.ActivityDetailUserCars;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.io.Serializable;
 import java.util.List;
 
-import es.dmoral.toasty.Toasty;
-
 /**
- * Created by Muhajir on 30/09/2017.
+ * Created by Muhajir on 08/10/2017.
  */
 
-public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.MyViewHolder>{
+public class CarsUserAdapter extends RecyclerView.Adapter<CarsUserAdapter.MyViewHolder>{
     private List<DataCars> carsList;
     private int lastPosition=-1;
     private View mView;
@@ -72,7 +66,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.MyViewHolder>{
                 public void onClick(View view) {
                     Gson gson = new Gson();
                     String car = gson.toJson(carsList.get(getAdapterPosition()));
-                    Intent i=new Intent(view.getContext(),ActivityDetailCars.class);
+                    Intent i=new Intent(view.getContext(),ActivityDetailUserCars.class);
                     i.putExtra("car", car);
                     view.getContext().startActivity(i);
                 }
@@ -116,7 +110,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.MyViewHolder>{
     }
 
 
-    public CarsAdapter(List<DataCars> carsList) {
+    public CarsUserAdapter(List<DataCars> carsList) {
         this.carsList = carsList;
     }
 
@@ -128,7 +122,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.MyViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(CarsAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(CarsUserAdapter.MyViewHolder holder, int position) {
         holder.bindItem(carsList.get(position));
         setAnimation(mView, position);
     }
@@ -146,3 +140,4 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.MyViewHolder>{
         }
     }
 }
+

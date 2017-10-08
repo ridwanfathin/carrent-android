@@ -17,6 +17,8 @@ import com.rental_apps.android.rental_apps.ActivityLogin;
 import com.rental_apps.android.rental_apps.R;
 import com.rental_apps.android.rental_apps.SPreferenced.SPref;
 import com.rental_apps.android.rental_apps.api.client;
+import com.rental_apps.android.rental_apps.model.dashboard.ResponseInfoDashboard;
+import com.rental_apps.android.rental_apps.model.model_user.ResponseRegister;
 import com.rental_apps.android.rental_apps.myinterface.InitComponent;
 import com.rental_apps.android.rental_apps.utils.move;
 import com.squareup.picasso.Picasso;
@@ -26,6 +28,9 @@ import br.liveo.interfaces.OnPrepareOptionsMenuLiveo;
 import br.liveo.model.HelpLiveo;
 import br.liveo.navigationliveo.NavigationLiveo;
 import es.dmoral.toasty.Toasty;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Muhajir on 29/09/2017.
@@ -38,7 +43,6 @@ public class AdminMain extends NavigationLiveo implements OnItemClickListener {
 
     @Override
     public void onInt(Bundle savedInstanceState) {
-
         mContext=this;
         // User Information
         adminListUser=new AdminListUser();
@@ -53,10 +57,10 @@ public class AdminMain extends NavigationLiveo implements OnItemClickListener {
 
         mHelpLiveo = new HelpLiveo();
         mHelpLiveo.add(getString(R.string.dashboard), R.drawable.ic_action_dock);
-        mHelpLiveo.add(getString(R.string.pesanan), R.drawable.ic_action_email,10);
-        mHelpLiveo.add(getString(R.string.mobil), R.drawable.ic_nav_transport,10);
-        mHelpLiveo.add(getString(R.string.user), R.drawable.ic_action_person);
-        mHelpLiveo.add(getString(R.string.admin), R.drawable.ic_action_cc_bcc);
+        mHelpLiveo.add(getString(R.string.pesanan), R.drawable.ic_action_email,0);
+        mHelpLiveo.add(getString(R.string.mobil), R.drawable.ic_nav_transport,0);
+        mHelpLiveo.add(getString(R.string.user), R.drawable.ic_action_person,0);
+        mHelpLiveo.add(getString(R.string.admin), R.drawable.ic_action_cc_bcc,0);
 
         with(this).startingPosition(0)
                 .addAllHelpItem(mHelpLiveo.getHelp())
@@ -88,7 +92,7 @@ public class AdminMain extends NavigationLiveo implements OnItemClickListener {
 
         switch (position){
             case 0:
-                mFragment = AdminListCart.newInstance(mHelpLiveo.get(position).getName());
+                mFragment = ActivityAdminDashboard.newInstance(mHelpLiveo.get(position).getName());
                 break;
             case 1:
                 mFragment = AdminListTransaksi.newInstance(mHelpLiveo.get(position).getName());

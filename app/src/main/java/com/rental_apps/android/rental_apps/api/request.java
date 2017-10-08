@@ -1,5 +1,7 @@
 package com.rental_apps.android.rental_apps.api;
 
+import com.rental_apps.android.rental_apps.model.dashboard.ResponseInfoDashboard;
+import com.rental_apps.android.rental_apps.model.model_mobil.ResponseRegisterCars;
 import com.rental_apps.android.rental_apps.model.model_transaksi.ResponseTransaksi;
 import com.rental_apps.android.rental_apps.model.model_user.ResponseLogin;
 import com.rental_apps.android.rental_apps.model.model_mobil.ResponseCars;
@@ -46,7 +48,8 @@ public interface request{
                                       @Field("ALAMAT")String alamat,
                                       @Field("PASSWORD")String password,
                                       @Field("ACTIVATED")Integer activated,
-                                      @Field("GROUP_USER")Integer group_user);
+                                      @Field("GROUP_USER")Integer group_user,
+                                      @Field("PHOTO")String photo);
 
 
     @GET("Api/mobil")
@@ -55,16 +58,19 @@ public interface request{
 
     @FormUrlEncoded
     @POST("Api/mobil")
-    Call<ResponseCars> mobilRegister(@Field("NAMA_MOBIL") String NAMA_MOBIL,
-                                     @Field("MERK_MOBIL") String MERK_MOBIL,
-                                     @Field("DESKRIPSI_MOBIL") String DESKRIPSI_MOBIL,
-                                     @Field("TAHUN_MOBIL") String TAHUN_MOBIL,
-                                     @Field("KAPASITAS_MOBIL") String KAPASITAS_MOBIL,
-                                     @Field("HARGA_MOBIL") String HARGA_MOBIL,
-                                     @Field("WARNA_MOBIL") String WARNA_MOBIL,
-                                     @Field("BENSIN_MOBIL") String BENSIN_MOBIL,
-                                     @Field("PLAT_NO_MOBIL") String PLAT_NO_MOBIL,
-                                     @Field("STATUS_MOBIL") String STATUS_MOBIL);
+    Call<ResponseRegisterCars> mobilRegister(@Field("NAMA_MOBIL") String NAMA_MOBIL,
+                                             @Field("MERK_MOBIL") String MERK_MOBIL,
+                                             @Field("DESKRIPSI_MOBIL") String DESKRIPSI_MOBIL,
+                                             @Field("TAHUN_MOBIL") String TAHUN_MOBIL,
+                                             @Field("KAPASITAS_MOBIL") String KAPASITAS_MOBIL,
+                                             @Field("HARGA_MOBIL") String HARGA_MOBIL,
+                                             @Field("WARNA_MOBIL") String WARNA_MOBIL,
+                                             @Field("BENSIN_MOBIL") Integer BENSIN_MOBIL,
+                                             @Field("PLAT_NO_MOBIL") String PLAT_NO_MOBIL,
+                                             @Field("STATUS_MOBIL") String STATUS_MOBIL,
+                                             @Field("PHOTO") String PHOTO
+                                             );
+
 
     @GET("Api/user/{GROUP_USER}/{ID_USER}")
     Call<ResponseUser> dataUser(
@@ -75,5 +81,8 @@ public interface request{
 
     @GET("Api/pesanan")
     Call<ResponseTransaksi>  dataTransaksi();
+
+    @GET("Api/dashboard")
+    Call<ResponseInfoDashboard>  dataInfoDashboard();
 
 }
