@@ -1,6 +1,6 @@
 package com.rental_apps.android.rental_apps.api;
 
-import com.rental_apps.android.rental_apps.model.dashboard.ResponseInfoDashboard;
+import com.rental_apps.android.rental_apps.model.model_dashboard.ResponseInfoDashboard;
 import com.rental_apps.android.rental_apps.model.model_mobil.ResponseRegisterCars;
 import com.rental_apps.android.rental_apps.model.model_transaksi.ResponseTransaksi;
 import com.rental_apps.android.rental_apps.model.model_user.ResponseLogin;
@@ -15,7 +15,6 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 /**
  * Created by Muhajir on 03/09/2017.
@@ -71,6 +70,22 @@ public interface request{
                                              @Field("PHOTO") String PHOTO
                                              );
 
+    @FormUrlEncoded
+    @PUT("Api/mobil")
+    Call<ResponseRegisterCars> mobilUpdate(@Field("ID_MOBIL") String ID_MOBIL,
+                                           @Field("NAMA_MOBIL") String NAMA_MOBIL,
+                                             @Field("MERK_MOBIL") String MERK_MOBIL,
+                                             @Field("DESKRIPSI_MOBIL") String DESKRIPSI_MOBIL,
+                                             @Field("TAHUN_MOBIL") String TAHUN_MOBIL,
+                                             @Field("KAPASITAS_MOBIL") String KAPASITAS_MOBIL,
+                                             @Field("HARGA_MOBIL") String HARGA_MOBIL,
+                                             @Field("WARNA_MOBIL") String WARNA_MOBIL,
+                                             @Field("BENSIN_MOBIL") Integer BENSIN_MOBIL,
+                                             @Field("PLAT_NO_MOBIL") String PLAT_NO_MOBIL,
+                                             @Field("STATUS_MOBIL") String STATUS_MOBIL,
+                                             @Field("PHOTO") String PHOTO
+    );
+
 
     @GET("Api/user/{GROUP_USER}/{ID_USER}")
     Call<ResponseUser> dataUser(
@@ -84,5 +99,11 @@ public interface request{
 
     @GET("Api/dashboard")
     Call<ResponseInfoDashboard>  dataInfoDashboard();
+
+    @FormUrlEncoded
+    @POST("Api/pesanan")
+    Call<ResponseTransaksi> checkout(@Field("ID_USER") String ID_USER,
+                                     @Field("TOTAL_PEMBAYARAN") String TOTAL_PEMBAYARAN);
+
 
 }

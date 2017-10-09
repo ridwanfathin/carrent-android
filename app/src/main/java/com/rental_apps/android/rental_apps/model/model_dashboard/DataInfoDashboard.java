@@ -1,4 +1,4 @@
-package com.rental_apps.android.rental_apps.model.dashboard;
+package com.rental_apps.android.rental_apps.model.model_dashboard;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -3,30 +3,18 @@ package com.rental_apps.android.rental_apps.admin;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mikepenz.itemanimators.SlideLeftAlphaAnimator;
 import com.rental_apps.android.rental_apps.R;
-import com.rental_apps.android.rental_apps.adapter.TransaksiAdapter;
 import com.rental_apps.android.rental_apps.api.client;
-import com.rental_apps.android.rental_apps.model.dashboard.ResponseInfoDashboard;
-import com.rental_apps.android.rental_apps.model.model_transaksi.DataTransaksi;
-import com.rental_apps.android.rental_apps.model.model_transaksi.ResponseTransaksi;
+import com.rental_apps.android.rental_apps.model.model_dashboard.ResponseInfoDashboard;
 import com.rental_apps.android.rental_apps.myinterface.InitComponent;
-
-import java.security.PrivateKey;
-import java.util.ArrayList;
-import java.util.List;
 
 import customfonts.MyTextView;
 import es.dmoral.toasty.Toasty;

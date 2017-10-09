@@ -16,6 +16,15 @@ public class SPref {
     private static String ALAMAT="ALAMAT";
     private static String GROUP_USER="GROUP_USER";
     private static String PASSWORD="PASSWORD";
+    private static String CARTS="CARTS";
+
+    public static String getCARTS() {
+        return CARTS;
+    }
+
+    public static void setCARTS(String CARTS) {
+        SPref.CARTS = CARTS;
+    }
 
     public static String getPASSWORD() {
         return PASSWORD;

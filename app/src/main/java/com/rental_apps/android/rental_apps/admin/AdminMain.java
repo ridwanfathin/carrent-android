@@ -5,21 +5,14 @@ import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.pixplicity.easyprefs.library.Prefs;
 import com.rental_apps.android.rental_apps.ActivityLogin;
 import com.rental_apps.android.rental_apps.R;
 import com.rental_apps.android.rental_apps.SPreferenced.SPref;
 import com.rental_apps.android.rental_apps.api.client;
-import com.rental_apps.android.rental_apps.model.dashboard.ResponseInfoDashboard;
-import com.rental_apps.android.rental_apps.model.model_user.ResponseRegister;
-import com.rental_apps.android.rental_apps.myinterface.InitComponent;
 import com.rental_apps.android.rental_apps.utils.move;
 import com.squareup.picasso.Picasso;
 
@@ -27,10 +20,6 @@ import br.liveo.interfaces.OnItemClickListener;
 import br.liveo.interfaces.OnPrepareOptionsMenuLiveo;
 import br.liveo.model.HelpLiveo;
 import br.liveo.navigationliveo.NavigationLiveo;
-import es.dmoral.toasty.Toasty;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by Muhajir on 29/09/2017.
