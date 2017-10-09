@@ -20,9 +20,14 @@ import com.rental_apps.android.rental_apps.adapter.CarsAdapter;
 import com.rental_apps.android.rental_apps.adapter.CartAdapter;
 import com.rental_apps.android.rental_apps.adapter.Carts;
 import com.rental_apps.android.rental_apps.api.client;
+import com.rental_apps.android.rental_apps.model.model_carts.DataCarts;
+import com.rental_apps.android.rental_apps.model.model_mobil.DataCars;
+import com.rental_apps.android.rental_apps.model.model_transaksi.ResponseRegisterTransaksi;
 import com.rental_apps.android.rental_apps.model.model_transaksi.ResponseTransaksi;
 import com.rental_apps.android.rental_apps.myinterface.InitComponent;
 import com.rental_apps.android.rental_apps.utils.move;
+
+import java.util.ArrayList;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import customfonts.MyTextView;
@@ -114,10 +119,11 @@ public class ActivityListTransaksi extends AppCompatActivity implements InitComp
         pDialog.setCancelable(false);
         pDialog.show();
 
-        Call<ResponseTransaksi> checkout= client.getApi().checkout(Prefs.getString(SPref.getIdUser(),null),""+Carts.totalAmount(SPref.getCARTS()));
-        checkout.enqueue(new Callback<ResponseTransaksi>() {
+        Call<ResponseRegisterTransaksi> checkout= client.getApi().checkout(""+Prefs.getInt(SPref.getIdUser(),0),""+Carts.totalAmount(SPref.getCARTS()));
+        checkout.enqueue(new Callback<ResponseRegisterTransaksi>() {
             @Override
-            public void onResponse(Call<ResponseTransaksi> call, Response<ResponseTransaksi> response) {
+            public void onResponse(Call<ResponseRegisterTransaksi> call, Response<ResponseRegisterTransaksi> response) {
+                pDialog.hide();
                 if (response.isSuccessful()){
                     if (response.body().getStatus()){
                         new SweetAlertDialog(mContext, SweetAlertDialog.SUCCESS_TYPE)
@@ -127,6 +133,7 @@ public class ActivityListTransaksi extends AppCompatActivity implements InitComp
                                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                     @Override
                                     public void onClick(SweetAlertDialog sDialog) {
+                                        Carts.reset(SPref.getCARTS());
                                         move.moveActivity(mContext, UserMain.class);
                                         finish();
                                     }
@@ -137,8 +144,9 @@ public class ActivityListTransaksi extends AppCompatActivity implements InitComp
             }
 
             @Override
-            public void onFailure(Call<ResponseTransaksi> call, Throwable t) {
-
+            public void onFailure(Call<ResponseRegisterTransaksi> call, Throwable t) {
+                pDialog.hide();
+                Toasty.error(mContext,t.getMessage().toString(),Toast.LENGTH_SHORT).show();
             }
         });
     }

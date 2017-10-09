@@ -95,4 +95,8 @@ public class Carts {
         }
         return total;
     }
+
+    public static void reset(String key){
+        saveOrder(new ArrayList<DataCarts>(),key);
+    }
 }

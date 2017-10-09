@@ -1,19 +1,26 @@
 package com.rental_apps.android.rental_apps.api;
 
+import com.rental_apps.android.rental_apps.model.model_carts.DataCarts;
 import com.rental_apps.android.rental_apps.model.model_dashboard.ResponseInfoDashboard;
+import com.rental_apps.android.rental_apps.model.model_mobil.DataCars;
 import com.rental_apps.android.rental_apps.model.model_mobil.ResponseRegisterCars;
+import com.rental_apps.android.rental_apps.model.model_transaksi.ResponseRegisterTransaksi;
 import com.rental_apps.android.rental_apps.model.model_transaksi.ResponseTransaksi;
 import com.rental_apps.android.rental_apps.model.model_user.ResponseLogin;
 import com.rental_apps.android.rental_apps.model.model_mobil.ResponseCars;
 import com.rental_apps.android.rental_apps.model.model_user.ResponseRegister;
 import com.rental_apps.android.rental_apps.model.model_user.ResponseUser;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 /**
@@ -102,8 +109,8 @@ public interface request{
 
     @FormUrlEncoded
     @POST("Api/pesanan")
-    Call<ResponseTransaksi> checkout(@Field("ID_USER") String ID_USER,
-                                     @Field("TOTAL_PEMBAYARAN") String TOTAL_PEMBAYARAN);
+    Call<ResponseRegisterTransaksi> checkout(@Field("ID_USER") String ID_USER,
+                                             @Field("TOTAL_PEMBAYARAN") String TOTAL_PEMBAYARAN);
 
 
 }
