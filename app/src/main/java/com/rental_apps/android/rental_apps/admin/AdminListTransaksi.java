@@ -86,6 +86,12 @@ public class AdminListTransaksi extends Fragment implements InitComponent {
         // TODO Auto-generated method stub
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_icon, menu);
+        setItem(menu);
+    }
+
+    private void setItem(Menu menu){
+        MenuItem menuAdd = menu.findItem(R.id.add);
+        menuAdd.setVisible(false);
     }
 
 
@@ -146,16 +152,17 @@ public class AdminListTransaksi extends Fragment implements InitComponent {
                         listTransaksi.addAll(dataTransaksi.getData());
                         mAdapter.notifyDataSetChanged();
                     } else {
-                        Toasty.error(mContext, "gagal", Toast.LENGTH_LONG).show();
+                        Toasty.error(mContext, "Tidak Di Temukan Data", Toast.LENGTH_LONG).show();
                     }
                 }else {
-                    Toasty.error(mContext, "gagal", Toast.LENGTH_LONG).show();
+                    Toasty.error(mContext, "Tidak Di Temukan Data", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseTransaksi> call, Throwable t) {
-                Toasty.error(mContext,t.getMessage(),Toast.LENGTH_LONG).show();
+                Toasty.error(mContext, "Tidak Di Temukan Data", Toast.LENGTH_LONG).show();
+//                Toasty.error(mContext,t.getMessage(),Toast.LENGTH_LONG).show();
             }
 
         });

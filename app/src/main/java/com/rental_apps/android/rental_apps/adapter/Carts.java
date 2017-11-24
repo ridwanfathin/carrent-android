@@ -57,6 +57,11 @@ public class Carts {
         return gson.fromJson(json, type);
     }
 
+    public static String getAllOrder(String key){
+        Gson gson = new Gson();
+        return gson.toJson(getOrder(key));
+    }
+
     public static Integer getSize(String key){
         if (!Prefs.contains(key)) {
             return 0;

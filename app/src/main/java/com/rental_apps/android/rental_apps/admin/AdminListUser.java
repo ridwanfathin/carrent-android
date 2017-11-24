@@ -87,8 +87,15 @@ public class AdminListUser extends Fragment implements InitComponent {
         // TODO Auto-generated method stub
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_icon, menu);
+        setItem(menu);
     }
 
+    private void setItem(Menu menu){
+        if (Integer.parseInt(getArguments().getString(GroupUser))==2){
+            MenuItem menuAdd=menu.findItem(R.id.add);
+            menuAdd.setVisible(false);
+        }
+    }
 
 
     @Override

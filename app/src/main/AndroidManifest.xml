@@ -59,6 +59,10 @@
             android:screenOrientation="portrait"
             android:label="List Mobil"
             ></activity>
+        <activity android:name=".admin.ActivityDetailListTransaksi" android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            android:label="List Mobil"
+            ></activity>
     </application>
 
 </manifest>

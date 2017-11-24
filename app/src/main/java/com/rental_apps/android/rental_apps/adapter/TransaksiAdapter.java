@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.rental_apps.android.rental_apps.R;
+import com.rental_apps.android.rental_apps.admin.ActivityDetailListTransaksi;
 import com.rental_apps.android.rental_apps.admin.ActivityDetailUsers;
 import com.rental_apps.android.rental_apps.api.client;
 import com.rental_apps.android.rental_apps.model.model_transaksi.DataTransaksi;
@@ -54,9 +55,9 @@ public class TransaksiAdapter extends RecyclerView.Adapter<TransaksiAdapter.MyVi
                 @Override
                 public void onClick(View view) {
                     Gson gson=new Gson();
-                    String user=gson.toJson(transaksiList.get(getAdapterPosition()));
-                    Intent i=new Intent(mContext, ActivityDetailUsers.class);
-                    i.putExtra("transaksi",user);
+                    String transaksi=gson.toJson(transaksiList.get(getAdapterPosition()));
+                    Intent i=new Intent(mContext, ActivityDetailListTransaksi.class);
+                    i.putExtra("transaksi",transaksi);
                     mContext.startActivity(i);
                 }
             });

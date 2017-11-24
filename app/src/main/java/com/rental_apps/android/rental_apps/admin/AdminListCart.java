@@ -165,15 +165,16 @@ public class AdminListCart extends Fragment implements InitComponent {
                         listCars.addAll(dataCars.getData());
                         mAdapter.notifyDataSetChanged();
                     } else {
-                        Toasty.error(mContext, "gagal", Toast.LENGTH_LONG).show();
+                        Toasty.error(mContext, "Tidak Di Temukan Data", Toast.LENGTH_LONG).show();
                     }
                 }else{
-                    Toasty.error(mContext,"gagal",Toast.LENGTH_SHORT).show();
+                    Toasty.error(mContext,"Tidak Di Temukan Data",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseCars> call, Throwable t) {
+//                Toasty.error(mContext, "Tidak Di Temukan Data", Toast.LENGTH_LONG).show();
                 Toasty.error(mContext,t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });

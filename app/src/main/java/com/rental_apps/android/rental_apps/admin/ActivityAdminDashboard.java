@@ -150,7 +150,9 @@ public class ActivityAdminDashboard extends Fragment implements InitComponent {
         jumlah_user.setText(user);
         jumlah_pesanan.setText(pesanan);
         jumlah_mobil.setText(mobil);
-        jumlah_total.setText("Rp. "+String.format("%,.2f", Double.parseDouble(total)));
+        if(total!=null){
+            jumlah_total.setText("Rp. "+String.format("%,.2f", Double.parseDouble(total)));
+        }
     }
 
 }

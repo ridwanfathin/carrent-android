@@ -2,6 +2,7 @@ package com.rental_apps.android.rental_apps.api;
 
 import com.rental_apps.android.rental_apps.model.model_carts.DataCarts;
 import com.rental_apps.android.rental_apps.model.model_dashboard.ResponseInfoDashboard;
+import com.rental_apps.android.rental_apps.model.model_detail_transaksi.ResponseDetailTransaksi;
 import com.rental_apps.android.rental_apps.model.model_mobil.DataCars;
 import com.rental_apps.android.rental_apps.model.model_mobil.ResponseRegisterCars;
 import com.rental_apps.android.rental_apps.model.model_transaksi.ResponseRegisterTransaksi;
@@ -10,6 +11,8 @@ import com.rental_apps.android.rental_apps.model.model_user.ResponseLogin;
 import com.rental_apps.android.rental_apps.model.model_mobil.ResponseCars;
 import com.rental_apps.android.rental_apps.model.model_user.ResponseRegister;
 import com.rental_apps.android.rental_apps.model.model_user.ResponseUser;
+
+import org.json.JSONStringer;
 
 import java.util.ArrayList;
 
@@ -110,7 +113,18 @@ public interface request{
     @FormUrlEncoded
     @POST("Api/pesanan")
     Call<ResponseRegisterTransaksi> checkout(@Field("ID_USER") String ID_USER,
-                                             @Field("TOTAL_PEMBAYARAN") String TOTAL_PEMBAYARAN);
+                                             @Field("TOTAL_PEMBAYARAN") String TOTAL_PEMBAYARAN,
+                                             @Field("LIST_CART") String LIST_CART
+                                             );
+
+    @GET("Api/pesanan/{KODE_TRANSAKSI}")
+    Call<ResponseDetailTransaksi> dataDetailTransaksi(
+            @Path("KODE_TRANSAKSI") String KODE_TRANSAKSI
+    );
+
+//    @FormUrlEncoded
+//    @POST("Api/pesanan")
+//    Call<ResponseRegisterTransaksi> checkout(@Body DataCarts data);
 
 
 }

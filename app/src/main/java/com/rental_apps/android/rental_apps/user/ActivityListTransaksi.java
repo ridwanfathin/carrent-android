@@ -119,7 +119,7 @@ public class ActivityListTransaksi extends AppCompatActivity implements InitComp
         pDialog.setCancelable(false);
         pDialog.show();
 
-        Call<ResponseRegisterTransaksi> checkout= client.getApi().checkout(""+Prefs.getInt(SPref.getIdUser(),0),""+Carts.totalAmount(SPref.getCARTS()));
+        Call<ResponseRegisterTransaksi> checkout= client.getApi().checkout(""+Prefs.getInt(SPref.getIdUser(),0),""+Carts.totalAmount(SPref.getCARTS()),Carts.getAllOrder(SPref.getCARTS()));
         checkout.enqueue(new Callback<ResponseRegisterTransaksi>() {
             @Override
             public void onResponse(Call<ResponseRegisterTransaksi> call, Response<ResponseRegisterTransaksi> response) {
@@ -146,7 +146,7 @@ public class ActivityListTransaksi extends AppCompatActivity implements InitComp
             @Override
             public void onFailure(Call<ResponseRegisterTransaksi> call, Throwable t) {
                 pDialog.hide();
-                Toasty.error(mContext,t.getMessage().toString(),Toast.LENGTH_SHORT).show();
+                Toasty.error(mContext,t.getMessage().toString()+Carts.getAllOrder(SPref.getCARTS()),Toast.LENGTH_SHORT).show();
             }
         });
     }
