@@ -22,7 +22,7 @@ import br.liveo.model.HelpLiveo;
 import br.liveo.navigationliveo.NavigationLiveo;
 
 /**
- * Created by Muhajir on 29/09/2017.
+ * Created by Ujang Wahyu on 04/01/2018.
  */
 
 public class AdminMain extends NavigationLiveo implements OnItemClickListener {
@@ -46,7 +46,9 @@ public class AdminMain extends NavigationLiveo implements OnItemClickListener {
 
         mHelpLiveo = new HelpLiveo();
         mHelpLiveo.add(getString(R.string.dashboard), R.drawable.ic_action_dock);
-        mHelpLiveo.add(getString(R.string.pesanan), R.drawable.ic_action_email,0);
+        mHelpLiveo.add(getString(R.string.pesanan_baru), R.drawable.ic_action_email,0);
+        mHelpLiveo.add(getString(R.string.pesanan_proses), R.drawable.ic_action_email,0);
+        mHelpLiveo.add(getString(R.string.pesanan_selesai), R.drawable.ic_action_email,0);
         mHelpLiveo.add(getString(R.string.mobil), R.drawable.ic_nav_transport,0);
         mHelpLiveo.add(getString(R.string.user), R.drawable.ic_action_person,0);
         mHelpLiveo.add(getString(R.string.admin), R.drawable.ic_action_cc_bcc,0);

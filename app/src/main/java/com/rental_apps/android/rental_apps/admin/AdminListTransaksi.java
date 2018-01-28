@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,7 +37,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by Muhajir on 30/09/2017.
+ * Created by Ujang Wahyu on 04/01/2018.
  */
 
 public class AdminListTransaksi extends Fragment implements InitComponent {
@@ -142,6 +143,7 @@ public class AdminListTransaksi extends Fragment implements InitComponent {
 
     public void getTransaksi(){
         final Call<ResponseTransaksi> transaksi= client.getApi().dataTransaksi();
+//        Log.d("test","hekki");
         transaksi.enqueue(new Callback<ResponseTransaksi>() {
             @Override
             public void onResponse(Call<ResponseTransaksi> call, Response<ResponseTransaksi> response) {

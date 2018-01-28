@@ -1,7 +1,7 @@
 package com.rental_apps.android.rental_apps.adapter;
 
 /**
- * Created by Muhajir on 29/10/2017.
+ * Created by Ujang Wahyu on 04/01/2018.
  */
 
 import android.content.Context;

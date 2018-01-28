@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <customfonts.MyTextView
-        android:id="@+id/confirm"
+        android:id="@+id/checkout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -25,5 +25,4 @@
         >
 
     </android.support.v7.widget.RecyclerView>
-
 </RelativeLayout>

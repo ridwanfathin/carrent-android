@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.rental_apps.android.rental_apps">
+
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -9,60 +10,71 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name=".PrefsApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".PrefsApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivityLogin"
-            android:screenOrientation="portrait"
-            >
+        <activity
+            android:name=".ActivityLogin"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityRegister"
+        <activity
+            android:name=".ActivityRegister"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".admin.AdminMain"
             android:screenOrientation="portrait"
-            ></activity>
-        <activity android:name=".admin.AdminMain" android:theme="@style/nLiveoDrawer"
+            android:theme="@style/nLiveoDrawer" />
+        <activity
+            android:name=".user.UserMain"
             android:screenOrientation="portrait"
-            ></activity>
-        <activity android:name=".user.UserMain" android:theme="@style/nLiveoDrawer"
+            android:theme="@style/nLiveoDrawer" />
+        <activity
+            android:name=".admin.ActivityDetailCars"
             android:screenOrientation="portrait"
-            ></activity>
-        <activity android:name=".admin.ActivityDetailCars" android:theme="@style/AppDetail"
+            android:theme="@style/AppDetail" />
+        <activity
+            android:name=".user.ActivityDetailUserCars"
             android:screenOrientation="portrait"
-            ></activity>
-        <activity android:name=".user.ActivityDetailUserCars" android:theme="@style/AppDetail"
+            android:theme="@style/AppDetail" />
+        <activity
+            android:name=".admin.ActivityDetailUsers"
             android:screenOrientation="portrait"
-            ></activity>
-        <activity android:name=".admin.ActivityDetailUsers" android:theme="@style/AppDetail"
+            android:theme="@style/AppDetail" />
+        <activity
+            android:name=".admin.AdminEditProfile"
             android:screenOrientation="portrait"
-            ></activity>
-
-        <activity android:name=".admin.AdminEditProfile" android:theme="@style/AppDetail"
+            android:theme="@style/AppDetail" />
+        <activity
+            android:name=".admin.ActivityCreateAdmin"
             android:screenOrientation="portrait"
-            ></activity>
-        <activity android:name=".admin.ActivityCreateAdmin" android:theme="@style/AppTheme"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".admin.ActivityCreateMobil"
             android:screenOrientation="portrait"
-            ></activity>
-        <activity android:name=".admin.ActivityCreateMobil" android:theme="@style/AppTheme"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".admin.ActivityEditMobil"
             android:screenOrientation="portrait"
-            ></activity>
-        <activity android:name=".admin.ActivityEditMobil" android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"
-            ></activity>
-        <activity android:name=".user.ActivityListTransaksi" android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".user.ActivityListTransaksi"
             android:label="List Mobil"
-            ></activity>
-        <activity android:name=".admin.ActivityDetailListTransaksi" android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".admin.ActivityDetailListTransaksi"
             android:label="List Mobil"
-            ></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".user.ActivityDetailListHistory"></activity>
     </application>
 
 </manifest>

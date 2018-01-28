@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * Created by Muhajir on 03/09/2017.
+ * Created by Ujang Wahyu on 04/01/2018.
  */
 public class DataCars {
     @SerializedName("ID_MOBIL")

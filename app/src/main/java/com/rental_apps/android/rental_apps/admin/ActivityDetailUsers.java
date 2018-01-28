@@ -21,7 +21,7 @@ import customfonts.MyTextView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * Created by Muhajir on 01/10/2017.
+ * Created by Ujang Wahyu on 04/01/2018.
  */
 
 public class ActivityDetailUsers extends AppCompatActivity implements InitComponent {

@@ -28,7 +28,7 @@ import org.w3c.dom.Text;
 import customfonts.MyTextView;
 
 /**
- * Created by Muhajir on 30/09/2017.
+ * Created by Ujang Wahyu on 04/01/2018.
  */
 
 public class ActivityDetailCars extends AppCompatActivity implements InitComponent , View.OnClickListener {

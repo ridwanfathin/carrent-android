@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.rental_apps.android.rental_apps.api.client;
 import com.rental_apps.android.rental_apps.model.model_user.DataUser;
@@ -18,12 +19,13 @@ import com.rental_apps.android.rental_apps.myinterface.InitComponent;
 import com.rental_apps.android.rental_apps.utils.validate;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by Muhajir on 03/09/2017.
+ * Created by Ujang Wahyu on 04/01/2018.
  */
 public class ActivityRegister extends AppCompatActivity implements InitComponent, View.OnClickListener{
 
@@ -116,11 +118,11 @@ public class ActivityRegister extends AppCompatActivity implements InitComponent
     }
 
     private void register(){
-        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
-        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setTitleText("Loading");
-        pDialog.setCancelable(false);
-        pDialog.show();
+//        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+//        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+//        pDialog.setTitleText("Loading");
+//        pDialog.setCancelable(false);
+//        pDialog.show();
 
         Call<ResponseRegister> register;
         register = client.getApi().userRegister(etNama.getText().toString(),
@@ -136,34 +138,38 @@ public class ActivityRegister extends AppCompatActivity implements InitComponent
 
             @Override
             public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
-                pDialog.hide();
+//                pDialog.hide();
                 if (response.isSuccessful()){
                     if (response.body().getStatus()) {
-                        new SweetAlertDialog(mContext, SweetAlertDialog.SUCCESS_TYPE)
-                                .setTitleText("Info")
-                                .setContentText("Akun Berhasil Di Buat!")
-                                .show();
+//                        new SweetAlertDialog(mContext, SweetAlertDialog.SUCCESS_TYPE)
+//                                .setTitleText("Info")
+//                                .setContentText("Akun Berhasil Di Buat!")
+//                                .show();
+                        Toasty.error(mContext,"Akun Berhasil Di Buat!", Toast.LENGTH_LONG).show();
                     }else {
-                        new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
-                                .setTitleText("Info")
-                                .setContentText("Akun Gagal Di Buat!")
-                                .show();
+//                        new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
+//                                .setTitleText("Info")
+//                                .setContentText("Akun Gagal Di Buat!")
+//                                .show();
+                        Toasty.error(mContext,"Akun Gagal Di Buat!",Toast.LENGTH_LONG).show();
                     }
                 }else{
-                    new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("Info")
-                            .setContentText("Akun Gagal Di Buat!")
-                            .show();
+//                    new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
+//                            .setTitleText("Info")
+//                            .setContentText("Akun Gagal Di Buat!")
+//                            .show();
+                    Toasty.error(mContext,"Akun Gagal Di Buat!",Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseRegister> call, Throwable t) {
-                pDialog.hide();
-                new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
-                        .setTitleText("Oops...")
-                        .setContentText("Koneksi bermasalah!")
-                        .show();
+//                pDialog.hide();
+//                new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
+//                        .setTitleText("Oops...")
+//                        .setContentText("Koneksi bermasalah!")
+//                        .show();
+                Toasty.error(mContext,"Koneksi bermasalah!",Toast.LENGTH_LONG).show();
             }
         });
     }

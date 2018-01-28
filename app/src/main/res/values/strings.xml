@@ -1,9 +1,11 @@
 <resources>
-    <string name="app_name">RENTCAR</string>
+    <string name="app_name">RentCar</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="dashboard">Dashboard</string>
-    <string name="pesanan">Pesanan</string>
+    <string name="pesanan_baru">Pesanan Masuk</string>
+    <string name="pesanan_proses">Pesanan Di Proses</string>
+    <string name="pesanan_selesai">Pesanan Selesai</string>
     <string name="mobil">Mobil</string>
     <string name="setting">Settings</string>
     <string name="logout">Logout</string>

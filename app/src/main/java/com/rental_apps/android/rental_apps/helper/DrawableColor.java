@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.graphics.drawable.DrawableCompat;
 
 /**
- * Created by Muhajir on 30/09/2017.
+ * Created by Ujang Wahyu on 04/01/2018.
  */
 
 public class DrawableColor {

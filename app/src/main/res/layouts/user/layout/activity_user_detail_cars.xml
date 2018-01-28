@@ -25,14 +25,14 @@
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginStart="48dp"
             app:expandedTitleMarginEnd="64dp"
-            android:background="@drawable/toolbarbg"
+
             >
 
             <ImageView
                 android:id="@+id/mainbackdrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitCenter"
+                android:scaleType="centerCrop"
                 android:fitsSystemWindows="true"
                 android:src="@drawable/bg"
                 app:layout_collapseMode="parallax"

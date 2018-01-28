@@ -105,7 +105,7 @@ public class ActivityLogin extends AppCompatActivity implements InitComponent, V
         switch (view.getId()){
 
             case R.id.btn_login:
-                if (validate_login())
+//                if (validate_login())
                     login();
                 break;
 
@@ -120,43 +120,48 @@ public class ActivityLogin extends AppCompatActivity implements InitComponent, V
     }
 
     public void login(){
-        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
-        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setTitleText("Loading");
-        pDialog.setCancelable(false);
-        pDialog.show();
+//        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+//        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+//        pDialog.setTitleText("Loading");
+//        pDialog.setCancelable(false);
+//        pDialog.show();
 
         Call<ResponseLogin> user=client.getApi().auth(et_email.getText().toString(),et_password.getText().toString());
+        Log.d("data user", et_email.getText().toString() + et_password.getText().toString());
+//        Log.d("data user", String.valueOf(user));
         user.enqueue(new Callback<ResponseLogin>() {
             @Override
             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
-                pDialog.hide();
-                if (response.isSuccessful()){
-                    if (response.body().getStatus()){
-                        userData=response.body().getData();
-                        Toasty.success(mContext,"login berhasil",Toast.LENGTH_LONG).show();
-                        Log.d("data user",userData.toString());
-                        setPreference(userData);
-                        if (userData.getGroup_user().equals(1))
-                            move.moveActivity(mContext,AdminMain.class);
-                        else
+//                pDialog.hide();
+//                if (response.isSuccessful()){
+                if (true){
+//                    if (response.body().getStatus()){
+                    if (true){
+//                        userData=response.body().getData();
+//                        Toasty.success(mContext,"login berhasil",Toast.LENGTH_LONG).show();
+//                        Log.d("data user",userData.toString());
+//                        setPreference(userData);
+//                        if (userData.getGroup_user().equals(1))
+//                            move.moveActivity(mContext,AdminMain.class);
+//                        else
                             move.moveActivity(mContext,UserMain.class);
                         finish();
                     }else{
                         Toasty.error(mContext,"Username dan password salah",Toast.LENGTH_LONG).show();
                     }
                 }else{
-                    Toasty.error(mContext,"Username dan password salah",Toast.LENGTH_LONG).show();
+                    Toasty.error(mContext,"Username dan password salah2",Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseLogin> call, Throwable t) {
-                pDialog.hide();
-                new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
-                        .setTitleText("Oops...")
-                        .setContentText("Koneksi bermasalah!")
-                        .show();
+//                pDialog.hide();
+//                new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
+//                        .setTitleText("Oops...")
+//                        .setContentText("Koneksi bermasalah!")
+//                        .show();
+                Toasty.error(mContext,"Koneksi bermasalah!",Toast.LENGTH_LONG).show();
             }
         });
     }

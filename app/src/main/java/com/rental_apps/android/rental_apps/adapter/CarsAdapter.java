@@ -30,7 +30,7 @@ import java.util.List;
 import es.dmoral.toasty.Toasty;
 
 /**
- * Created by Muhajir on 30/09/2017.
+ * Created by Ujang Wahyu on 04/01/2018.
  */
 
 public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.MyViewHolder>{
@@ -96,7 +96,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.MyViewHolder>{
             }
 
             if (cars.getIMAGE().size()>0)
-                Picasso.with(view.getContext()).load(client.getBaseImg()+"mobil/"+cars.getIMAGE().get(0)).resize(150,150).centerCrop().into(imgCar);
+                Picasso.with(view.getContext()).load(client.getBaseImg()+"mobil/"+cars.getIMAGE().get(0)).into(imgCar);
 
 
 

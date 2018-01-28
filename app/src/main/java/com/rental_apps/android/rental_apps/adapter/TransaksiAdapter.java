@@ -26,7 +26,7 @@ import customfonts.MyTextView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * Created by Muhajir on 30/09/2017.
+ * Created by Ujang Wahyu on 04/01/2018.
  */
 
 public class TransaksiAdapter extends RecyclerView.Adapter<TransaksiAdapter.MyViewHolder>{

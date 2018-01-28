@@ -1,7 +1,7 @@
 package com.rental_apps.android.rental_apps.model.model_detail_transaksi;
 
 /**
- * Created by Muhajir on 29/10/2017.
+ * Created by Ujang Wahyu on 04/01/2018.
  */
 
 import com.google.gson.annotations.Expose;

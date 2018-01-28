@@ -1,7 +1,7 @@
 package com.rental_apps.android.rental_apps.helper;
 
 /**
- * Created by Muhajir on 29/09/2017.
+ * Created by Ujang Wahyu on 04/01/2018.
  */
 
 public class SweetAlert {

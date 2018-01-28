@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#568AB7</color>
-    <color name="colorPrimaryDark">#4576a1</color>
-    <color name="colorPrimaryLight">#709cc2</color>
+    <color name="colorPrimary">#1999D7</color>
+    <color name="colorPrimaryDark">#128bc6</color>
+    <color name="colorPrimaryLight">#1999D7</color>
     <color name="bgTransaksiRed">#da4749</color>
-    <color name="colorAccent">#E6C14D</color>
-    <color name="colorAccentDark">#C4A035</color>
+    <color name="colorAccent">#d75c1a</color>
+    <color name="colorAccentDark">#d75c1a</color>
     <color name="colorAccentLight">#FEEAAB</color>
 
     <color name="grey_hard">#96989A</color>
@@ -53,10 +53,10 @@
         <item >#568AB7</item>
         <item >#F44336</item>
         <item >#EC407A</item>
-        <item >#9C27B0</item>
-        <item >#673AB7</item>
+        <item >#1999D7</item>
+        <item >#1999D7</item>
 
-        <item >#3F51B5</item>
+        <item >#1999D7</item>
         <item >#2196F3</item>
         <item >#03A9F4</item>
         <item >#00BCD4</item>
@@ -114,9 +114,9 @@
     <color name="nliveo_blue_grey_colorPrimaryDark">#80455A64</color>
     <color name="nliveo_blue_grey_alpha_colorPrimaryDark">#80455A64</color>
 
-    <color name="nliveo_purple_colorPrimary">#673AB7</color>
-    <color name="nliveo_purple_colorPrimaryDark">#512DA8</color>
-    <color name="nliveo_purple_alpha_colorPrimaryDark">#80512DA8</color>
+    <color name="nliveo_purple_colorPrimary">#1999D7</color>
+    <color name="nliveo_purple_colorPrimaryDark">#1999D7</color>
+    <color name="nliveo_purple_alpha_colorPrimaryDark">#1999D7</color>
 
 
     <color name="textSub">#76818a</color>

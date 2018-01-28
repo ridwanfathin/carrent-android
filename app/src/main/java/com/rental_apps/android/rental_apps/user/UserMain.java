@@ -17,6 +17,7 @@ import com.rental_apps.android.rental_apps.ActivityLogin;
 import com.rental_apps.android.rental_apps.R;
 import com.rental_apps.android.rental_apps.SPreferenced.SPref;
 import com.rental_apps.android.rental_apps.admin.AdminEditProfile;
+import com.rental_apps.android.rental_apps.admin.AdminListCart;
 import com.rental_apps.android.rental_apps.api.client;
 import com.rental_apps.android.rental_apps.myinterface.InitComponent;
 import com.rental_apps.android.rental_apps.utils.move;
@@ -29,7 +30,7 @@ import br.liveo.navigationliveo.NavigationLiveo;
 import es.dmoral.toasty.Toasty;
 
 /**
- * Created by Muhajir on 29/09/2017.
+ * Created by Ujang Wahyu on 04/01/2018.
  */
 
 public class UserMain extends NavigationLiveo implements OnItemClickListener {
@@ -86,7 +87,7 @@ public class UserMain extends NavigationLiveo implements OnItemClickListener {
 
         switch (position){
             case 0:
-//                mFragment = AdminListCart.newInstance(mHelpLiveo.get(position).getName());
+                mFragment = UserHistoryTransaksi.newInstance(mHelpLiveo.get(position).getName());
                 break;
             case 1:
                 mFragment = UserListCars.newInstance(mHelpLiveo.get(position).getName());

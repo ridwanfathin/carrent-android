@@ -24,7 +24,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 /**
- * Created by Muhajir on 08/10/2017.
+ * Created by Ujang Wahyu on 04/01/2018.
  */
 
 public class CarsUserAdapter extends RecyclerView.Adapter<CarsUserAdapter.MyViewHolder>{
@@ -83,14 +83,15 @@ public class CarsUserAdapter extends RecyclerView.Adapter<CarsUserAdapter.MyView
             price.setText("Rp. "+String.format("%,.2f", Double.parseDouble(cars.getHARGAMOBIL().toString())));
 
             if (Integer.parseInt(cars.getSTATUSSEWA().toString())==1){
-                status.setText("Disewa");
+                status.setText("Sedang Disewa");
             }
             else {
                 status.setText("Tersedia");
             }
 
             if (cars.getIMAGE().size()>0)
-                Picasso.with(view.getContext()).load(client.getBaseImg()+"mobil/"+cars.getIMAGE().get(0)).resize(150,150).centerCrop().into(imgCar);
+                Picasso.with(view.getContext()).load(client.getBaseImg()+"mobil/"+cars.getIMAGE().get(0)).into(imgCar);
+            //Picasso.with(view.getContext()).load(client.getBaseImg()+"mobil/"+cars.getIMAGE().get(0)).resize(150,150).centerCrop().into(imgCar);
 
 
 

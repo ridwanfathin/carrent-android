@@ -44,7 +44,7 @@ package com.rental_apps.android.rental_apps.admin;
         import retrofit2.Response;
 
 /**
- * Created by Muhajir on 08/10/2017.
+ * Created by Ujang Wahyu on 04/01/2018.
  */
 
 public class ActivityDetailListTransaksi extends AppCompatActivity implements InitComponent, View.OnClickListener {
@@ -91,7 +91,7 @@ public class ActivityDetailListTransaksi extends AppCompatActivity implements In
     @Override
     public void initUI() {
         recyclerCart = (RecyclerView)findViewById(R.id.rCartList);
-        confirm = (MyTextView)findViewById(R.id.confirm);
+        confirm = (MyTextView)findViewById(R.id.checkout);
     }
 
     @Override
@@ -144,16 +144,17 @@ public class ActivityDetailListTransaksi extends AppCompatActivity implements In
                         listDetailTransaksi.addAll(dataTransaksi.getData());
                         mAdapter.notifyDataSetChanged();
                     } else {
-                        Toasty.error(mContext, "Tidak Ada Data Ditemukan", Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, "Tidak Ada Data Ditemukan", Toast.LENGTH_LONG).show();
+
                     }
                 }else {
-                    Toasty.error(mContext, "Tidak Ada Data Ditemukan", Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, "Tidak Ada Data Ditemukan", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseDetailTransaksi> call, Throwable t) {
-                Toasty.error(mContext,t.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext,t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -162,8 +163,8 @@ public class ActivityDetailListTransaksi extends AppCompatActivity implements In
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.confirm:
-                Toasty.success(mContext,"Proses",Toast.LENGTH_LONG).show();
+            case R.id.checkout:
+                Toast.makeText(mContext,"Proses",Toast.LENGTH_LONG).show();
                 break;
         }
     }
