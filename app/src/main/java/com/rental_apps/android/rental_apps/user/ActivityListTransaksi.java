@@ -113,17 +113,17 @@ public class ActivityListTransaksi extends AppCompatActivity implements InitComp
     }
 
     private void checkout(){
-        pDialog = new SweetAlertDialog(mContext, SweetAlertDialog.PROGRESS_TYPE);
-        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setTitleText("Loading");
-        pDialog.setCancelable(false);
-        pDialog.show();
+//        pDialog = new SweetAlertDialog(mContext, SweetAlertDialog.PROGRESS_TYPE);
+//        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+//        pDialog.setTitleText("Loading");
+//        pDialog.setCancelable(false);
+//        pDialog.show();
 
         Call<ResponseRegisterTransaksi> checkout= client.getApi().checkout(""+Prefs.getInt(SPref.getIdUser(),0),""+Carts.totalAmount(SPref.getCARTS()),Carts.getAllOrder(SPref.getCARTS()));
         checkout.enqueue(new Callback<ResponseRegisterTransaksi>() {
             @Override
             public void onResponse(Call<ResponseRegisterTransaksi> call, Response<ResponseRegisterTransaksi> response) {
-                pDialog.hide();
+//                pDialog.hide();
                 if (response.isSuccessful()){
                     if (response.body().getStatus()){
                         new SweetAlertDialog(mContext, SweetAlertDialog.SUCCESS_TYPE)
@@ -145,7 +145,7 @@ public class ActivityListTransaksi extends AppCompatActivity implements InitComp
 
             @Override
             public void onFailure(Call<ResponseRegisterTransaksi> call, Throwable t) {
-                pDialog.hide();
+//                pDialog.hide();
                 Toasty.error(mContext,t.getMessage().toString()+Carts.getAllOrder(SPref.getCARTS()),Toast.LENGTH_SHORT).show();
             }
         });

@@ -79,7 +79,6 @@
                 android:isIndicator="false"
 
                 />
-
             <customfonts.MyTextView
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
@@ -92,28 +91,28 @@
         </LinearLayout>
 
 
-        <LinearLayout
+            <LinearLayout
 
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rating"
-            android:background="#fff"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-
-            <customfonts.MyTextView
-                android:id="@+id/nama_mobil"
-                android:layout_width="wrap_content"
+                android:id="@+id/name"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="@string/name"
-                android:textColor="@color/Tex"
-                android:textSize="20dp" />
+                android:layout_below="@+id/rating"
+                android:background="#fff"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <!--<customfonts.MyTextView-->
+
+                <customfonts.MyTextView
+                    android:id="@+id/nama_mobil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="@string/name"
+                    android:textColor="@color/Tex"
+                    android:textSize="20dp" />
+
+                <!--<customfonts.MyTextView-->
                 <!--android:layout_width="wrap_content"-->
                 <!--android:layout_height="wrap_content"-->
                 <!--android:layout_marginTop="6dp"-->
@@ -123,7 +122,7 @@
                 <!--android:textSize="16dp" />-->
 
 
-        </LinearLayout>
+            </LinearLayout>
 
 
         <!--*********color**********-->
@@ -366,19 +365,31 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <com.rental_apps.android.rental_apps.helper.DatePickerView
-                    android:id="@+id/tgl_awal"
+                android:orientation="horizontal" >
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Tanggal Awal"
-                    android:background="@drawable/border"
-                    android:layout_margin="20sp"
-                    android:padding="15sp"
                     android:layout_weight="1"
-                    android:textSize="13sp"
-                    />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <com.rental_apps.android.rental_apps.helper.DatePickerView
+                        android:id="@+id/tgl_awal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Tanggal Awal"
+                        android:background="@drawable/border"
+                        android:layout_margin="20sp"
+                        android:padding="15sp"
+                        android:layout_weight="1"
+                        android:textSize="13sp" />
+
+                    <!--<TimePicker-->
+                        <!--android:id="@+id/jam"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:timePickerMode="clock"-->
+                        <!--android:background="#F88F00" />-->
+                </LinearLayout>
+
                 <com.rental_apps.android.rental_apps.helper.DatePickerView
                     android:id="@+id/tgl_akhir"
                     android:layout_width="match_parent"
@@ -391,6 +402,31 @@
                     android:textSize="13sp"
                     />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <Button
+                    android:id="@+id/bt_showtimepicker"
+                    android:text="Pilih Jam"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_bg"
+                    android:elevation="3dp"
+                    android:gravity="center"
+                    android:textColor="@color/White"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:text="Jam dipilih : "
+                    android:id="@+id/tv_timeresult"
+                    android:layout_gravity="center"
+                    android:elevation="3dp"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
             <!--<LinearLayout-->
             <!--android:id="@+id/colorcircle"-->
             <!--android:layout_width="wrap_content"-->
@@ -603,12 +639,12 @@
                 android:background="@drawable/button_bg"
                 android:elevation="3dp"
                 android:gravity="center"
+                android:textColor="@color/White"
                 android:paddingBottom="12dp"
                 android:paddingLeft="90dp"
                 android:paddingRight="90dp"
                 android:paddingTop="12dp"
                 android:text="ADD TO CART"
-                android:textColor="@color/White"
                 android:textSize="15sp"
                 android:layout_marginBottom="30sp"
                 />

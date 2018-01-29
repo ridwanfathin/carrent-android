@@ -1,21 +1,28 @@
 package com.rental_apps.android.rental_apps.user;
 
+import android.annotation.SuppressLint;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -71,6 +78,10 @@ public class ActivityDetailUserCars extends AppCompatActivity implements InitCom
     private DatePickerView tgl_awal;
     private DatePickerView tgl_akhir;
     private MyTextView add_cart;
+    private TextView tvTimeResult;
+    private Button btTimePicker;
+    private TimePickerDialog timePickerDialog;
+    private String jam;
 
     @Override
     protected void onCreate(Bundle SavedInstance) {
@@ -81,6 +92,15 @@ public class ActivityDetailUserCars extends AppCompatActivity implements InitCom
         car= gson.fromJson(getIntent().getStringExtra("car"), DataCars.class);
 
         startInit();
+
+        tvTimeResult = (TextView) findViewById(R.id.tv_timeresult);
+        btTimePicker = (Button) findViewById(R.id.bt_showtimepicker);
+        btTimePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTimeDialog();
+            }
+        });
     }
 
     @Override
@@ -123,6 +143,7 @@ public class ActivityDetailUserCars extends AppCompatActivity implements InitCom
 
         tgl_awal=(DatePickerView)findViewById(R.id.tgl_awal);
         tgl_akhir=(DatePickerView)findViewById(R.id.tgl_akhir);
+//        jam =(TimePicker) findViewById(R.id.jam);
         add_cart=(MyTextView)findViewById(R.id.add_cart);
 
 
@@ -163,13 +184,48 @@ public class ActivityDetailUserCars extends AppCompatActivity implements InitCom
         add_cart.setOnClickListener(this);
     }
 
+    private void showTimeDialog() {
+
+        /**
+         * Calendar untuk mendapatkan waktu saat ini
+         */
+        Calendar calendar = Calendar.getInstance();
+
+        /**
+         * Initialize TimePicker Dialog
+         */
+        timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                /**
+                 * Method ini dipanggil saat kita selesai memilih waktu di DatePicker
+                 */
+                jam = hourOfDay+":"+minute+":00";
+                tvTimeResult.setText("Jam dipilih: "+jam);
+
+            }
+        },
+                /**
+                 * Tampilkan jam saat ini ketika TimePicker pertama kali dibuka
+                 */
+                calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),
+
+                /**
+                 * Cek apakah format waktu menggunakan 24-hour format
+                 */
+                DateFormat.is24HourFormat(this));
+
+        timePickerDialog.show();
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.add_cart:
                 if (validasi()){
                     if ((DateDifference.betweenDates(tgl_awal.getText().toString(),tgl_akhir.getText().toString())+1)>0){
-                        Carts.order(new DataCarts(car.getIDMOBIL(),car.getNAMAMOBIL(),car.getMERKMOBIL(),car.getPLATNOMOBIL(),tgl_awal.getText().toString(),tgl_akhir.getText().toString(),car.getHARGAMOBIL(),""+(Integer.parseInt(car.getHARGAMOBIL())*(DateDifference.betweenDates(tgl_awal.getText().toString(),tgl_akhir.getText().toString())+1))), SPref.getCARTS());
+                        Carts.order(new DataCarts(car.getIDMOBIL(),car.getNAMAMOBIL(),car.getMERKMOBIL(),car.getPLATNOMOBIL(),tgl_awal.getText().toString()+" "+jam,tgl_akhir.getText().toString()+" "+jam,car.getHARGAMOBIL(),""+(Integer.parseInt(car.getHARGAMOBIL())*(DateDifference.betweenDates(tgl_awal.getText().toString(),tgl_akhir.getText().toString())+1))), SPref.getCARTS());
+
                         invalidateOptionsMenu();
                         Toasty.success(mContext,"Mobil Berhasil Disimpan",Toast.LENGTH_SHORT).show();
                     }else{
@@ -180,6 +236,7 @@ public class ActivityDetailUserCars extends AppCompatActivity implements InitCom
         }
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // TODO Auto-generated method stub
